@@ -21,6 +21,8 @@ insecure                # Allow all DB writes from clients (for prototyping)
 reactjs:react
 jhartma:cjsx
 fourseven:scss
-twbs:bootstrap
 mquandalle:jade
 reactrouter:react-router-ssr
+cosmos:browserify
+less
+nemo64:bootstrap
