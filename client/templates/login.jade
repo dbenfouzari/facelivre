@@ -1,0 +1,27 @@
+template(name='logged_out')
+  li.dropdown(id='login-dropdown-list')
+    a.dropdown-toggle(data-toggle='dropdown')
+      | Connexion / Inscription
+      b.caret
+
+    div.dropdown-menu
+      form
+        input.form-control(name='loginEmail' type='text' placeholder="Nom d'utilisateur")
+        input.form-control(name='loginPassword' type='password' placeholder="Mot de passe")
+        button.btn.btn-primary.col-xs-12.col-sm-12(id='login-buttons-password' type='submit') Connexion
+
+template(name='logged_in')
+  li.dropdown(id='login-dropdown-list')
+    a.dropdown-toggle(data-toggle='dropdown')
+      = primaryEmail
+      b.caret
+
+    .dropdown-menu
+      a.btn.btn-default.btn-block.go-home(href='/products') Retour
+      a.btn.btn-primary.btn-block.logout Déconnexion
+
+template(name='_loginButtonsCustom')
+  if currentUser
+    +logged_in
+  else
+    +logged_out

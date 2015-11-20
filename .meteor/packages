@@ -26,3 +26,7 @@ reactrouter:react-router-ssr
 cosmos:browserify
 less
 nemo64:bootstrap
+aldeed:collection2
+accounts-password
+ian:accounts-ui-bootstrap-3
+fortawesome:fontawesome

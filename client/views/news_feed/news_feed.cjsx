@@ -1,5 +1,9 @@
 @NewsFeed = React.createClass
   render: ->
     <div ref='news_feed_wrapper'>
-      <h2>News Feed</h2>
+      <StatusForm />
+      <NewsFeedBlock />
+      <NewsFeedBlock />
+      <NewsFeedBlock />
+      <NewsFeedBlock />
     </div>

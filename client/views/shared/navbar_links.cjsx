@@ -1,3 +1,7 @@
 @NavbarLinks = React.createClass
   render: ->
-    <ul></ul>
+    <div>
+      <ul className='nav navbar-nav navbar-right'>
+        <LoginButtons/>
+      </ul>
+    </div>

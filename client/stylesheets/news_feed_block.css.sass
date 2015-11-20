@@ -1,0 +1,79 @@
+=border-radius($opts)
+  -webkit-border-radius: $opts
+  -moz-border-radius:    $opts
+  border-radius:         $opts
+
+.news_feed_block
+  background-color: #FFF
+  border: 1px solid
+  border-color: #E5E6E9 #DFE0E4 #D0D1D5
+  +border-radius(3px)
+  margin-bottom: 10px
+
+  .news_feed_block_header, .news_feed_block_content
+    padding: 12px 12px 0
+
+  .news_feed_block_header
+    .news_feed_author_image
+      float: left
+      margin-right: 8px
+
+    .news_feed_infos_wrapper
+      display: table-cell
+      width: 10000px
+      vertical-align: top
+
+      .news_feed_infos
+        display: inline-block
+
+        .vam
+          vertical-align: middle
+          display: inline-block
+
+          h5
+            margin: 2px 0 0
+            font-weight: bold
+            line-height: 1.38
+
+          .news_feed_time_ago
+            color: #9197A3
+            font-size: 12px
+
+  .news_feed_block_links_wrapper
+    margin-top: 12px
+    padding-bottom: 4px
+
+    .news_feed_block_links
+      padding: 4px 0 0 0
+      margin: 0 12px
+      border-top: 1px solid #E5E5E5
+
+      span
+        a
+          font-weight: bold
+          color: #7F7F7F
+          font-size: 12px
+          line-height: 14px
+          padding: 4px 4px 4px 0
+          margin-right: 20px
+
+          &:before
+            font-family: FontAwesome
+            display: inline-block
+            margin: 0 6px -3px 0
+
+          &:hover
+            &:before
+              text-decoration: none
+
+          &.like_link
+            &:before
+              content: "\f164"
+
+          &.comment_link
+            &:before
+              content: "\f075"
+
+          &.share_link
+            &:before
+              content: "\f064"
