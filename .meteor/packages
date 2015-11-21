@@ -18,7 +18,6 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 autopublish             # Publish all data to the clients (for prototyping)
 insecure                # Allow all DB writes from clients (for prototyping)
-reactjs:react
 jhartma:cjsx
 fourseven:scss
 mquandalle:jade
@@ -30,3 +29,5 @@ aldeed:collection2
 accounts-password
 ian:accounts-ui-bootstrap-3
 fortawesome:fontawesome
+underscore
+react
