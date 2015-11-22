@@ -19,14 +19,25 @@
 
     friend
 
-  getOnlineStatus: ->
+  getStatusClass: ->
     if @data.friend.status.online then 'online'
 
-  componentWillReceiveProps: (nextProps) ->
-    console.log 'Coucou'
-    @renderLi()
+  renderStatus: ->
+    status = @data.friend.status
+    if status.idle
+      friend_status = 'idle'
+      last_seen = moment(@data.friend.status.lastActivity).format()
+    else if status.online
+      friend_status = 'online'
+      last_seen = ''
+    else
+      friend_status = 'offline'
+      last_seen = moment(@data.friend.status.lastLogin.date).format()
 
-  renderLi: ->
+    <FriendStatus status={ friend_status }
+                  lastSeen={ last_seen } />
+
+  render: ->
     <li>
       <a href='#'>
 
@@ -38,11 +49,6 @@
           { @displayFriendName() }
         </span>
 
-        <div className="friend_status_wrapper #{ @getOnlineStatus() }">
-          <span className='friend_status'></span>
-        </div>
+        { @renderStatus() }
       </a>
     </li>
-
-  render: ->
-    @renderLi()

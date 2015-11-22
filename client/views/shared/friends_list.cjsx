@@ -2,6 +2,9 @@
 
   mixins: [ReactMeteorData]
 
+  componentDidMount: ->
+    safeStartMonitor 5000, 1000, false
+
   getMeteorData: ->
     current_user_id = Meteor.userId()
 
@@ -17,3 +20,11 @@
         { @renderFriends() }
       </ul>
     </div>
+
+safeStartMonitor = (threshold = 60000, interval = 5000, idleOnBlur = false) ->
+  Deps.autorun (c) ->
+    try
+      settings = {threshold, interval, idleOnBlur}
+      UserStatus.startMonitor(settings)
+      c.stop()
+      console.log "Idle monitor started with ", settings
