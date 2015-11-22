@@ -28,6 +28,33 @@ Schemas.Profile = new SimpleSchema({
   }
 });
 
+Schemas.UserStatusLogin = new SimpleSchema({
+  date: {
+    type: Date
+  }
+});
+
+Schemas.UserStatus = new SimpleSchema({
+  online: {
+    type: Boolean,
+    optional: false
+  },
+
+  lastLogin: {
+    type: Schemas.UserStatusLogin
+  },
+
+  idle: {
+    type: Boolean,
+    optional: true
+  },
+
+  lastActivity: {
+    type: Date,
+    optional: true
+  }
+});
+
 Schemas.User = new SimpleSchema({
   username: {
     type: String,
@@ -60,7 +87,10 @@ Schemas.User = new SimpleSchema({
 
   createdAt: {
     type: Date,
-    optional: true
+    optional: false,
+    autoValue: function() {
+      return new Date();
+    }
   },
 
   profile: {
@@ -72,6 +102,10 @@ Schemas.User = new SimpleSchema({
     type: Object,
     optional: true,
     blackbox: true
+  },
+
+  status: {
+    type: Schemas.UserStatus
   }
 });
 
@@ -84,5 +118,41 @@ Schemas.News = new SimpleSchema({
   author: {
     type: String, // Just the ID...
     optional: false
+  },
+
+  createdAt: {
+    type: Date,
+    optional: false,
+    autoValue: function() {
+      return new Date();
+    }
+  }
+});
+
+Schemas.FriendShip = new SimpleSchema({
+  emitter: {
+    type: String, // User ID
+    optional: false
+  },
+
+  receiver: {
+    type: String, // User ID
+    optional: false
+  },
+
+  accepted: {
+    type: Boolean,
+    optional: false,
+    autoValue: function() {
+      return false;
+    }
+  },
+
+  createdAt: {
+    type: Date,
+    optional: false,
+    autoValue: function() {
+      return new Date();
+    }
   }
 });
