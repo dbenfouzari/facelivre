@@ -1,8 +1,55 @@
-.friends_list
+.friends_list_wrapper
   position: fixed
   height: 100%
   top: 0
   right: 0
-  background-color: #F00
   width: 205px
   margin-top: 41px
+  border-left: 1px solid #CCC
+
+  .friends_list
+    margin: 0
+    padding: 0
+
+    li
+      font-size: 12px
+      line-height: 16px
+      list-style: none
+
+      a
+        height: 32px
+        padding: 4px 0 4px 8px
+        display: block
+        color: #000
+        text-decoration: none
+
+        .friend_image_wrapper
+          width: 32px
+          height: 32px
+          float: left
+
+          .friend_image
+            width: 32px
+            height: 32px
+            display: block
+
+        .friend_name
+          line-height: 32px
+          overflow: hidden
+          padding-left: 8px
+          text-overflow: ellipsis
+          white-space: nowrap
+
+        .friend_status_wrapper
+          line-height: 32px
+          float: right
+          margin: 0 4px
+          text-align: right
+
+          &.online
+            .friend_status
+              display: inline-block
+              width: 7px
+              height: 7px
+              border-radius: 50%
+              background-color: #009E1D
