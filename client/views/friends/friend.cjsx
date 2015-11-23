@@ -8,22 +8,22 @@
     friend: @getFriend()
 
   componentDidMount: ->
-    $(@refs.friend_status_ago).timeago()
+    self = this
+    $(ReactDOM.findDOMNode(@refs.tooltip_ago)).tooltip()
+    # $(@refs.tooltip_ago).attr 'title', $.timeago(@getLastSeen())
+    # Trigger change on hover
+    $(ReactDOM.findDOMNode(@refs.tooltip_ago)).on 'show.bs.tooltip', ->
+      if self.getLastSeen()
+        $(this).attr 'title', "Était en ligne #{$.timeago(self.getLastSeen())}"
+        $(this).attr 'data-original-title', "Était en ligne #{self.getTimeAgo()}"
+      else
+        $(this).attr 'title', ''
+        $(this).attr 'data-original-title', ''
 
   clearDOM: ->
-    $(@refs.friend_status_ago).text ''
 
   componentDidUpdate: (prevProps, prevState) ->
-    @clearDOM()
-
-    if prevProps.lastSeen is '' && @props.lastSeen != ''
-      $(@refs.friend_status_ago).timeago('updateFromDOM')
-
-    else if prevProps.lastSeen != '' && @props.lastSeen is ''
-      $(@refs.friend_status_ago).off()
-
-    else
-      $(@refs.friend_status_ago).timeago()
+    # $(@refs.tooltip_ago).attr 'title', $.timeago(@getLastSeen())
 
   displayFriendName: ->
     [@data.friend.profile.first_name, @data.friend.profile.last_name].join(' ')
@@ -49,33 +49,25 @@
 
   getLastSeen: ->
     status = @data.friend.status
-    if status.idle
+
+    date = if status.idle
       moment(status.lastActivity).format()
     else if status.online
       ''
     else
       moment(status.lastLogin.date).format()
 
-  renderStatus: ->
-    status = @data.friend.status
-    if status.idle
-      friend_status = 'idle'
-      last_seen = moment(@data.friend.status.lastActivity).format()
-    else if status.online
-      friend_status = 'online'
-      last_seen = ''
-    else
-      friend_status = 'offline'
-      last_seen = moment(@data.friend.status.lastLogin.date).format()
-
-    <FriendStatus status={ friend_status }
-                  lastSeen={ last_seen } />
+  getTimeAgo: ->
+    $.timeago @getLastSeen()
 
   render: ->
     <li>
       <Link to="/#{ @data.friend._id }" data-toggle='tooltip'
                                         data-placement='left'
-                                        title="J'aime la chatte">
+                                        className='tooltip_ago'
+                                        ref='tooltip_ago'
+                                        title="Était en ligne #{ @getLastSeen() }"
+                                        data-original-title="Était en ligne #{ @getLastSeen() }">
 
         <div className="friend_image_wrapper #{ @getStatusClass() }">
           <img className='friend_image' src={ @data.friend.profile.image }/>
