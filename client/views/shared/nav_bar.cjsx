@@ -1,3 +1,5 @@
+{ Link } = ReactRouter
+
 @NavBar = React.createClass
   render: ->
     <nav className='navbar navbar-default navbar-fixed-top'>
@@ -11,7 +13,7 @@
             <span className='icon-bar'/>
           </button>
 
-          <a className='navbar-brand' href='#'>F</a>
+          <Link to='/' className='navbar-brand'>F</Link>
         </div>
 
         <div id='navbar-collapsable' className='collapse navbar-collapse'>

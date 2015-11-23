@@ -1,9 +1,32 @@
+{ Link } = ReactRouter
+
 @Friend = React.createClass
 
   mixins: [ReactMeteorData]
 
   getMeteorData: ->
     friend: @getFriend()
+
+  componentDidMount: ->
+    self = this
+    $(ReactDOM.findDOMNode(@refs.tooltip_ago)).tooltip()
+    # $(@refs.tooltip_ago).attr 'title', $.timeago(@getLastSeen())
+    # Trigger change on hover
+    $(ReactDOM.findDOMNode(@refs.tooltip_ago)).on 'show.bs.tooltip', ->
+      if self.getLastSeen()
+        $(this).attr 'title', "Était en ligne #{$.timeago(self.getLastSeen())}"
+        $(this).attr 'data-original-title', "Était en ligne #{self.getTimeAgo()}"
+      else
+        $(this).attr 'title', ''
+        $(this).attr 'data-original-title', ''
+
+    $(ReactDOM.findDOMNode(@refs.tooltip_ago)).on 'click', ->
+      $(@).tooltip 'hide'
+
+  clearDOM: ->
+
+  componentDidUpdate: (prevProps, prevState) ->
+    # $(@refs.tooltip_ago).attr 'title', $.timeago(@getLastSeen())
 
   displayFriendName: ->
     [@data.friend.profile.first_name, @data.friend.profile.last_name].join(' ')
@@ -20,28 +43,36 @@
     friend
 
   getStatusClass: ->
-    if @data.friend.status.online then 'online'
-
-  renderStatus: ->
-    status = @data.friend.status
-    if status.idle
-      friend_status = 'idle'
-      last_seen = moment(@data.friend.status.lastActivity).format()
-    else if status.online
-      friend_status = 'online'
-      last_seen = ''
+    if @data.friend.status.idle
+      'idle'
+    else if @data.friend.status.online
+      'online'
     else
-      friend_status = 'offline'
-      last_seen = moment(@data.friend.status.lastLogin.date).format()
+      'offline'
 
-    <FriendStatus status={ friend_status }
-                  lastSeen={ last_seen } />
+  getLastSeen: ->
+    status = @data.friend.status
+
+    date = if status.idle
+      moment(status.lastActivity).format()
+    else if status.online
+      ''
+    else
+      moment(status.lastLogin.date).format()
+
+  getTimeAgo: ->
+    $.timeago @getLastSeen()
 
   render: ->
     <li>
-      <a href='#'>
+      <Link to="/#{ @data.friend._id }" data-toggle='tooltip'
+                                        data-placement='left'
+                                        className='tooltip_ago'
+                                        ref='tooltip_ago'
+                                        title="Était en ligne #{ @getLastSeen() }"
+                                        data-original-title="Était en ligne #{ @getLastSeen() }">
 
-        <div className='friend_image_wrapper'>
+        <div className="friend_image_wrapper #{ @getStatusClass() }">
           <img className='friend_image' src={ @data.friend.profile.image }/>
         </div>
 
@@ -49,6 +80,8 @@
           { @displayFriendName() }
         </span>
 
-        { @renderStatus() }
-      </a>
+        <span ref='friend_status_ago'
+            className='friend_last_seen'
+            title="#{ @getLastSeen() }" />
+      </Link>
     </li>
