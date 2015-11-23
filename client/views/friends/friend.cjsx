@@ -20,6 +20,9 @@
         $(this).attr 'title', ''
         $(this).attr 'data-original-title', ''
 
+    $(ReactDOM.findDOMNode(@refs.tooltip_ago)).on 'click', ->
+      $(@).tooltip 'hide'
+
   clearDOM: ->
 
   componentDidUpdate: (prevProps, prevState) ->

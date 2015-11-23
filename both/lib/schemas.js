@@ -105,7 +105,8 @@ Schemas.User = new SimpleSchema({
   },
 
   status: {
-    type: Schemas.UserStatus
+    type: Schemas.UserStatus,
+    optional: true
   }
 });
 

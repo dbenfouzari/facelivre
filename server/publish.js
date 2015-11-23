@@ -15,3 +15,7 @@ Meteor.publish('friendships', function(user_id) {
 Meteor.publish('news', function() {
   return NewsCollection.find();
 });
+
+Meteor.publish('profiles', function() {
+  return ProfileCollection.find();
+});
