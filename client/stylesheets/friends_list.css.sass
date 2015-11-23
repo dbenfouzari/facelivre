@@ -17,7 +17,7 @@
       list-style: none
 
       a
-        height: 32px
+        height: 40px
         padding: 4px 0 4px 8px
         display: block
         color: #000
@@ -32,6 +32,19 @@
             width: 32px
             height: 32px
             display: block
+            border-radius: 50%
+
+          &.offline
+            .friend_image
+              border: 3px solid #999999
+
+          &.idle
+            .friend_image
+              border: 3px solid #FF7300
+
+          &.online
+            .friend_image
+              border: 3px solid #009E1D
 
         .friend_name
           line-height: 32px
