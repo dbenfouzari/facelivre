@@ -6,31 +6,55 @@
   width: 205px
   margin-top: 41px
   border-left: 1px solid #CCC
+  background-color: #E9EAED
 
   .friends_list
     margin: 0
-    padding: 0
+    padding: 25px 0 0 0
 
     li
       font-size: 12px
       line-height: 16px
       list-style: none
+      position: relative
+
+      &.active
+        background-color: #C4C4C4
+        padding-left: 12px
+
+        // Before corresponds to border
+        &:before
+          content: ''
+          position: absolute
+          border: 20px solid #CCC
+          border-color: transparent transparent transparent #CCC
+          top: 8px
+          left: -2px
+
+        // After corresponds to inner arrow
+        &:after
+          content: ''
+          position: absolute
+          border: 17px solid #E9EAED
+          border-color: transparent transparent transparent #E9EAED
+          top: 11px
+          left: -2px
 
       a
-        height: 40px
+        height: 55px
         padding: 4px 0 4px 8px
         display: block
         color: #000
         text-decoration: none
 
         .friend_image_wrapper
-          width: 32px
-          height: 32px
+          width: 46px
+          height: 46px
           float: left
 
           .friend_image
-            width: 32px
-            height: 32px
+            width: 46px
+            height: 46px
             display: block
             border-radius: 50%
 
@@ -47,7 +71,7 @@
               border: 3px solid #009E1D
 
         .friend_name
-          line-height: 32px
+          line-height: 48px
           padding-left: 8px
           overflow: hidden
           text-overflow: ellipsis

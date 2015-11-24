@@ -10,8 +10,6 @@
   componentDidMount: ->
     self = this
     $(ReactDOM.findDOMNode(@refs.tooltip_ago)).tooltip()
-    # $(@refs.tooltip_ago).attr 'title', $.timeago(@getLastSeen())
-    # Trigger change on hover
     $(ReactDOM.findDOMNode(@refs.tooltip_ago)).on 'show.bs.tooltip', ->
       if self.getLastSeen()
         $(this).attr 'title', "Était en ligne #{$.timeago(self.getLastSeen())}"
@@ -22,11 +20,6 @@
 
     $(ReactDOM.findDOMNode(@refs.tooltip_ago)).on 'click', ->
       $(@).tooltip 'hide'
-
-  clearDOM: ->
-
-  componentDidUpdate: (prevProps, prevState) ->
-    # $(@refs.tooltip_ago).attr 'title', $.timeago(@getLastSeen())
 
   displayFriendName: ->
     [@data.friend.profile.first_name, @data.friend.profile.last_name].join(' ')
@@ -63,14 +56,26 @@
   getTimeAgo: ->
     $.timeago @getLastSeen()
 
+  handleClick: (e) ->
+    e.preventDefault()
+
+    if Session.get('selected') and Session.get('selected') is @data.friend._id
+      Session.set 'selected', null
+    else
+      Session.set 'selected', @data.friend._id
+
+  getActive: ->
+    if @props.active then 'active' else ''
+
   render: ->
-    <li>
-      <Link to="/#{ @data.friend._id }" data-toggle='tooltip'
-                                        data-placement='left'
-                                        className='tooltip_ago'
-                                        ref='tooltip_ago'
-                                        title="Était en ligne #{ @getLastSeen() }"
-                                        data-original-title="Était en ligne #{ @getLastSeen() }">
+    <li className={ @getActive() }>
+      <Link to="#" data-toggle='tooltip'
+                   data-placement='left'
+                   className='tooltip_ago'
+                   ref='tooltip_ago'
+                   title="Était en ligne #{ @getLastSeen() }"
+                   data-original-title="Était en ligne #{ @getLastSeen() }"
+                   onClick={ @handleClick }>
 
         <div className="friend_image_wrapper #{ @getStatusClass() }">
           <img className='friend_image' src={ @data.friend.profile.image }/>
