@@ -1,3 +1,5 @@
+@import '{}/client/lib/compatibility/variables.css.sass'
+
 .friends_list_wrapper
   position: fixed
   height: 100%
@@ -5,8 +7,8 @@
   right: 0
   width: 205px
   margin-top: 41px
-  border-left: 1px solid #CCC
-  background-color: #E9EAED
+  border-left: 1px solid $border-color
+  background-color: $grey-background
 
   .friends_list
     margin: 0
@@ -26,8 +28,8 @@
         &:before
           content: ''
           position: absolute
-          border: 20px solid #CCC
-          border-color: transparent transparent transparent #CCC
+          border: 20px solid $border-color
+          border-color: transparent transparent transparent $border-color
           top: 8px
           left: -2px
 
@@ -35,8 +37,8 @@
         &:after
           content: ''
           position: absolute
-          border: 17px solid #E9EAED
-          border-color: transparent transparent transparent #E9EAED
+          border: 17px solid $grey-background
+          border-color: transparent transparent transparent $grey-background
           top: 11px
           left: -2px
 

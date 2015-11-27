@@ -157,3 +157,28 @@ Schemas.FriendShip = new SimpleSchema({
     }
   }
 });
+
+Schemas.Message = new SimpleSchema({
+  emitter: {
+    type: SimpleSchema.RegEx.Id,
+    optional: false
+  },
+
+  receiver: {
+    type: SimpleSchema.RegEx.Id,
+    optional: false
+  },
+
+  message: {
+    type: String,
+    optional: false
+  },
+
+  createdAt: {
+    type: Date,
+    optional: false,
+    autoValue: function() {
+      return new Date();
+    }
+  }
+})

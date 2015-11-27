@@ -4,26 +4,24 @@
   mixins: [ReactMeteorData]
 
   getMeteorData: ->
-    if Session.get('selected')
-      selected = 'block'
-    else
-      selected = 'none'
-
-    selected: selected
-
-  getInitialState: ->
-    friend: null
-
-  componentWillUpdate: ->
-    @setState friend: Meteor.users.findOne({_id: Session.get('selected')})
+    selected: Session.get('selected')
+    friend: Meteor.users.findOne({_id: Session.get('selected')})
 
   getDisplay: ->
-    @data.selected
+    if @data.selected && @data.friend
+      'block'
+    else
+      'none'
+
+  renderMessages: ->
+    if @data.friend
+      <MessageBox with={ @data.friend } />
 
   render: ->
     <div>
       <Overlay ref='page_overlay' display={ @getDisplay() } />
       <div ref='messages_wrapper' style={{display: @getDisplay()}}
                                   className='messages_wrapper'>
+        { @renderMessages() }
       </div>
     </div>
