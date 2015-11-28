@@ -158,6 +158,28 @@ Schemas.FriendShip = new SimpleSchema({
   }
 });
 
+Schemas.ReadStatus = new SimpleSchema({
+  read: {
+    type: Boolean,
+    optional: false,
+    autoValue: function() {
+      if(this.isInsert) {
+        return false;
+      }
+    }
+  },
+
+  readAt: {
+    type: Date,
+    optional: true,
+    autoValue: function() {
+      if(this.isUpdate) {
+        return new Date();
+      }
+    }
+  }
+});
+
 Schemas.Message = new SimpleSchema({
   emitter: {
     type: SimpleSchema.RegEx.Id,
@@ -174,6 +196,11 @@ Schemas.Message = new SimpleSchema({
     optional: false
   },
 
+  read: {
+    type: Schemas.ReadStatus,
+    optional: false
+  },
+
   createdAt: {
     type: Date,
     optional: false,
@@ -181,4 +208,4 @@ Schemas.Message = new SimpleSchema({
       return new Date();
     }
   }
-})
+});

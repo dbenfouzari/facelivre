@@ -6,6 +6,7 @@
   height: 100%
   width: 60%
   display: block
+  border-left: 2px solid $border-color
 
   .create_message
     width: 100%
@@ -16,11 +17,6 @@
     z-index: 2
     float: right
     background-color: $grey-background
-
-    &:before
-      content: ''
-      display: block
-      border: 1px solid $border-color
 
     form
       padding: 10px
@@ -49,6 +45,16 @@
 
     .msgbox-message
       display: flex
+
+      i
+        position: relative
+        left: 50px
+        top: 5px
+        font-size: 10px
+        z-index: 1
+
+        &.read
+          color: #009E1D
 
       .info
         width: 30%
@@ -95,7 +101,7 @@
         max-width: 64%
         position: relative
         word-wrap: break-word
-        white-space: pre
+        white-space: pre-line
 
       &.person
         color: #808080

@@ -8,6 +8,7 @@
     @friends   = @getFriends()
     @full_name = @getFullName()
     @profile_picture = @getProfilePicture()
+    @new_messages = @getNewMessages()
 
   getFullName: ->
     [
@@ -21,6 +22,12 @@
       return friends
     else
       []
+
+  getNewMessages: (withFriend = null) ->
+    if withFriend
+      MessageCollection.find({emitter: withFriend, read: { read: false }}).fetch()
+    else
+      MessageCollection.find({read: { read: false }}).fetch()
 
   getProfilePicture: ->
     if @meteor_collection.profile.image
