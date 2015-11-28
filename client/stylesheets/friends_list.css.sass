@@ -1,21 +1,22 @@
 @import '{}/client/lib/compatibility/variables.css.sass'
 
 .friends_list_wrapper
+  font-family: 'ABeeZee'
+  font-size: 14px
   position: fixed
   height: 100%
   top: 0
   right: 0
-  width: 205px
+  width: $friends-list-width
   margin-top: 41px
-  border-left: 1px solid $border-color
-  background-color: $grey-background
+  background-color: #FFF
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3)
 
   .friends_list
     margin: 0
     padding: 25px 0 0 0
 
     li
-      font-size: 12px
       line-height: 16px
       list-style: none
       position: relative
@@ -71,95 +72,70 @@
             border-top: 3px solid #8F0808
 
       &.active
-        background-color: #C4C4C4
-        padding-left: 12px
+        background-color: #F3FDFF
+        border-left: 4px solid #2BA4DD
 
-        // Before corresponds to border
-        &:before
-          content: ''
-          position: absolute
-          border: 20px solid $border-color
-          border-color: transparent transparent transparent $border-color
-          top: 8px
-          left: -2px
-
-        // After corresponds to inner arrow
-        &:after
-          content: ''
-          position: absolute
-          border: 17px solid $grey-background
-          border-color: transparent transparent transparent $grey-background
-          top: 11px
-          left: -2px
+        a
+          color: #00A9FF !important
+          padding-left: $friend-padding-x - 4px
 
       a
-        height: 55px
-        padding: 4px 0 4px 8px
+        height: $friend-height
+        padding: $friend-padding
         display: block
-        color: #000
         text-decoration: none
+        color: #1D2538
 
         .friend_image_wrapper
-          width: 46px
-          height: 46px
+          width: $friend-image-dims
+          height: $friend-image-dims
           float: left
+          margin-right: $friend-padding-x
+          position: relative
 
           .friend_image
-            width: 46px
-            height: 46px
+            width: $friend-image-dims
+            height: $friend-image-dims
             display: block
             border-radius: 50%
 
+          &:before
+            content: ''
+            display: block
+            position: absolute
+            background-color: #FFF
+            width: 20px
+            height: 20px
+            border-radius: 50%
+            bottom: -5px
+            right: 5px
+
+          &:after
+            content: ''
+            display: block
+            position: absolute
+            width: 10px
+            height: 10px
+            border-radius: 50%
+            bottom: 0
+            right: 10px
+
           &.offline
-            .friend_image
-              border: 3px solid #999999
+            &:after
+              background-color: #999
 
           &.idle
-            .friend_image
-              border: 3px solid #FF7300
+            &:after
+              background-color: #FF7300
 
           &.online
-            .friend_image
-              border: 3px solid #009E1D
+            &:after
+              background-color: #57C76B
 
         .friend_name
-          line-height: 48px
-          padding-left: 8px
+          line-height: $friend-height - $friend-padding-y * 2
           overflow: hidden
           text-overflow: ellipsis
           white-space: nowrap
-          max-width: 155px
+          max-width: $friend-name-max-width
           float: left
-
-        .friend_status_wrapper
-          line-height: 32px
-          float: right
-          margin: 0 4px 0 0
-          text-align: right
-
-          .friend_status_ago
-            color: #9197A3
-            font-size: 11px
-            font-weight: normal
-            display: inline-block
-            line-height: 12px
-            vertical-align: middle
-            padding-right: 12px
-
-          .friend_status
-            display: inline-block
-            width: 7px
-            height: 7px
-            border-radius: 50%
-
-          &.online
-            .friend_status
-              background-color: #009E1D
-
-          &.idle
-            .friend_status
-              background-color: #FF7300
-
-          &.offline
-            .friend_status
-              background-color: #999999

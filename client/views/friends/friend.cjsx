@@ -94,9 +94,5 @@
         <span className='friend_name'>
           { @displayFriendName() }
         </span>
-
-        <span ref='friend_status_ago'
-            className='friend_last_seen'
-            title="#{ @getLastSeen() }" />
       </Link>
     </li>
