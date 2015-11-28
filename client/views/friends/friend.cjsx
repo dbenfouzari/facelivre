@@ -67,6 +67,14 @@
   getActive: ->
     if @props.active then 'active' else ''
 
+  renderNewMessages: ->
+    me = new User(Meteor.userId())
+    new_messages = me.getNewMessages(@data.friend._id)
+    nb = new_messages.length
+
+    if nb > 0
+      <div className='ribbon'><span>{ nb }</span></div>
+
   render: ->
     <li className={ @getActive() }>
       <Link to="#" data-toggle='tooltip'
@@ -76,6 +84,8 @@
                    title="Était en ligne #{ @getLastSeen() }"
                    data-original-title="Était en ligne #{ @getLastSeen() }"
                    onClick={ @handleClick }>
+
+        { @renderNewMessages() }
 
         <div className="friend_image_wrapper #{ @getStatusClass() }">
           <img className='friend_image' src={ @data.friend.profile.image }/>

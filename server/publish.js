@@ -19,3 +19,17 @@ Meteor.publish('news', function() {
 Meteor.publish('profiles', function() {
   return ProfileCollection.find();
 });
+
+Meteor.publish('emojis', function() {
+  return Emojis.find();
+});
+
+Meteor.publish('messages', function() {
+  return MessageCollection.find({
+    $or: [{
+      emitter: this.userId
+    }, {
+      receiver: this.userId
+    }]
+  });
+});
