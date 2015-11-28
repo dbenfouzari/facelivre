@@ -115,6 +115,7 @@
           height: $friend-image-dims
           float: left
           margin-right: $friend-padding-x
+          position: relative
 
           .friend_image
             width: $friend-image-dims
@@ -123,16 +124,28 @@
             border-radius: 50%
 
           // &.offline
-          //   .friend_image
-          //     border: 3px solid #999999
+          //   &:before
+          //     content: ''
+          //     display: block
+          //     position: absolute
+          //     background-color: #FFF
+          //     width: 20px
+          //     height: 20px
+          //     border-radius: 50%
+          //     top: 5px
+          //     right: 5px
 
-          // &.idle
-          //   .friend_image
-          //     border: 3px solid #FF7300
+          &.offline
+            .friend_image
+              border: 3px solid #999999
 
-          // &.online
-          //   .friend_image
-          //     border: 3px solid #009E1D
+          &.idle
+            .friend_image
+              border: 3px solid #FF7300
+
+          &.online
+            .friend_image
+              border: 3px solid #009E1D
 
         .friend_name
           line-height: $friend-height - $friend-padding-y * 2
