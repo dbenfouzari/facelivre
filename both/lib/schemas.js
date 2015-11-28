@@ -209,3 +209,33 @@ Schemas.Message = new SimpleSchema({
     }
   }
 });
+
+Schemas.Status = new SimpleSchema({
+  status: {
+    type: String,
+    optional: false
+  },
+
+  authorId: {
+    type: SimpleSchema.RegEx.Id,
+    optional: false
+  },
+
+  createdAt: {
+    type: Date,
+    optional: false,
+    autoValue: function() {
+      if(this.isInsert) {
+        return new Date();
+      }
+    }
+  },
+
+  updatedAt: {
+    type: Date,
+    optional: false,
+    autoValue: function() {
+      return new Date();
+    }
+  }
+});

@@ -10,4 +10,7 @@ FriendShipsCollection.attachSchema(Schemas.FriendShip);
 MessageCollection = new Mongo.Collection('messages');
 MessageCollection.attachSchema(Schemas.Message);
 
+StatusCollection = new Mongo.Collection('statuses');
+StatusCollection.attachSchema(Schemas.Status);
+
 Meteor.users.attachSchema(Schemas.User);
