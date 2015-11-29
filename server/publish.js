@@ -63,3 +63,12 @@ Meteor.publish('statuses', function() {
 
   return statuses;
 });
+
+Meteor.publish('comments', function(commentable) {
+  return CommentCollection.find({
+    commentable: {
+      commentableType: commentable.type,
+      commentableId: commentable.id
+    }
+  });
+});

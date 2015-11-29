@@ -1,0 +1,52 @@
+$comment-user-image-dims: 50px
+$comment-user-image-margin-right: 15px
+$comment-padding-left: 25px
+
+ul.comments
+  float: left
+  width: 100%
+  margin: 0
+  padding: 0
+  list-style: none
+
+  li.comment
+    float: left
+    width: 100%
+    padding: 0 $comment-padding-left
+    margin-bottom: 30px
+
+    &:first-child
+      margin-top: 30px
+
+    &:last-child
+      margin-bottom: 20px
+
+    section.comment_infos
+      float: left
+      width: 100%
+      .author_image
+        float: left
+        clear: left
+        margin-right: $comment-user-image-margin-right
+
+        img
+          width:  $comment-user-image-dims
+          height: $comment-user-image-dims
+          border-radius: 50%
+
+      .author_name
+        color: #333
+        clear: both
+        font-weight: bold
+
+      .created_at
+        display: block
+        color: #999
+        font-size: 11px
+
+    p
+      float: left
+      width: 100%
+      margin: 0
+      padding-left: $comment-user-image-margin-right + $comment-user-image-dims
+      white-space: pre-line

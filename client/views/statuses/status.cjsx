@@ -37,6 +37,19 @@
   renderTimeAgo: ->
     moment(@props.status.createdAt).fromNow()
 
+  handleShowComments: (e) ->
+    e.preventDefault()
+
+    $(@refs.btn_comment).toggleClass 'active'
+    $(@refs.section_comments).toggleClass 'active'
+    $(@refs.section_comments).find('textarea').focus()
+
+    @props.onUpdate()
+
+  getCommentable: ->
+    type: 'Status'
+    id: @props.status._id
+
   render: ->
     user = new User(@props.status.authorId)
 
@@ -62,7 +75,13 @@
 
       <section className='status_actions'>
         <a href='#' onClick={ @handleLike } className={ @doILike() }>Like</a>
-        <a href='#'>Comment</a>
+        <a href='#' onClick={ @handleShowComments } ref='btn_comment'>Comment</a>
         <a href='#'>Share</a>
+      </section>
+
+      <section className='comments' ref='section_comments'>
+        <Comments commentable={ @getCommentable() } />
+        <CommentForm onUpdate= { @props.onUpdate }
+                     commentable={ @getCommentable() } />
       </section>
     </div>

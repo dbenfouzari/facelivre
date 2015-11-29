@@ -246,3 +246,55 @@ Schemas.Status = new SimpleSchema({
     }
   }
 });
+
+Schemas.Commentable = new SimpleSchema({
+  commentableType: {
+    type: String,
+    optional: false
+  },
+
+  commentableId: {
+    type: SimpleSchema.RegEx.Id,
+    optional: false
+  }
+});
+
+Schemas.Comment = new SimpleSchema({
+  commentable: {
+    type: Schemas.Commentable,
+    optional: false
+  },
+
+  authorId: {
+    type: SimpleSchema.RegEx.Id,
+    optional: false
+  },
+
+  content: {
+    type: String,
+    optional: false
+  },
+
+  likers: {
+    type: [SimpleSchema.RegEx.Id],
+    optional: true
+  },
+
+  createdAt: {
+    type: Date,
+    optional: false,
+    autoValue: function() {
+      if(this.isInsert) {
+        return new Date();
+      }
+    }
+  },
+
+  updatedAt: {
+    type: Date,
+    optional: false,
+    autoValue: function() {
+      return new Date();
+    }
+  }
+});
