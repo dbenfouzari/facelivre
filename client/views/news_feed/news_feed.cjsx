@@ -34,8 +34,14 @@
   # componentDidUpdate: ->
   #   $('.news_feed_wrapper').masonry 'layout'
 
+  getMasonryOptions: ->
+    columnWidth: 420
+    itemSelector: '.status_wrapper'
+    gutter: 5
+    isFitWidth: true
+
   render: ->
-    <div className='news_feed_wrapper'>
+    <Masonry className={'news_feed_wrapper'} options={@getMasonryOptions()}>
       { @renderStatuses() }
-    </div>
+    </Masonry>
 # <StatusForm />
