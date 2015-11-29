@@ -1,19 +1,3 @@
-# @NewsFeed = React.createClass
-#   mixins: [ReactMeteorData]
-
-#   getMeteorData: ->
-#     news: StatusCollection.find().fetch()
-
-#   renderNews: ->
-#     _.map @data.news, (news) ->
-#       <News key={ news._id } news={ news } />
-
-#   render: ->
-#     <div ref='news_feed_wrapper'>
-#       <StatusForm />
-#       { @renderNews() }
-#     </div>
-
 @NewsFeed = React.createClass
   displayName: "NewsFeed"
 
@@ -26,14 +10,6 @@
     _.map @data.statuses, (status) ->
       <Status key={ status._id } status={ status } />
 
-  # componentDidMount: ->
-  #   $('.news_feed_wrapper').masonry
-  #     itemSelector: '.status_wrapper'
-  #     columnWidth: 420
-
-  # componentDidUpdate: ->
-  #   $('.news_feed_wrapper').masonry 'layout'
-
   getMasonryOptions: ->
     columnWidth: 420
     itemSelector: '.status_wrapper'
@@ -44,4 +20,3 @@
     <Masonry className={'news_feed_wrapper'} options={@getMasonryOptions()}>
       { @renderStatuses() }
     </Masonry>
-# <StatusForm />
