@@ -4,141 +4,169 @@
 .msgbox-messages-container
   float: right
   height: 100%
-  width: 60%
   display: block
   border-left: 2px solid $border-color
 
+  flex: 1
+  max-width: 600px
+  min-width: 300px
+
   .create_message
     width: 100%
-    height: 100px
+    height: 60px
     position: relative
-    border-top: 1px solid $border-color
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, .6)
     z-index: 2
     float: right
-    background-color: $grey-background
+    background-color: #FFF
 
     form
-      padding: 10px
+      padding: 10px 10px 10px (10px + 35px + 10px)
       position: relative
       height: 100%
 
+      img
+        width: 35px
+        height: 35px
+        position: absolute
+        left: 10px
+
       textarea
+        width: calc(100% - 80px - 10px)
         height: 100%
-        width: 100%
+        border: none
+
+        &:focus
+          outline: none
 
       button[type=submit]
         position: absolute
-        right: 20px
-        top: 33px
+        right: 10px
+        bottom: 13px
+        width: 80px
 
   .msgbox-messages
     margin: 0
     padding: 0
     float: right
-    height: calc(100% - 100px)
+    height: calc(100% - 60px)
     width: 100%
-    // overflow-y: scroll
-    // overflow-x: hidden
-    overflow: hidden
+    overflow-y: scroll
+    overflow-x: hidden
+    // overflow: hidden
     list-style: none
+    padding: 15px 15px 7px
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, .2)
 
-    .msgbox-message
-      display: flex
+    li // Message itself
+      width: 100%
+      float: left
+      &:not(:last-child)
+        margin-bottom: 15px
 
-      i
-        position: relative
-        left: 50px
-        top: 5px
-        font-size: 10px
-        z-index: 1
+      .author_avatar_wrapper
+        width: 35px
+        height: 35px
+        float: left
 
-        &.read
-          color: #009E1D
+        .author_avatar
+          width: 100%
+          height: 100%
+          border-radius: 5px
 
-      .info
-        width: 30%
-
-        a
-          display: block
-          text-decoration: none
-          color: #656C71
-          font-weight: bold
-          text-overflow: ellipsis
-          overflow: hidden
-          white-space: nowrap
-          padding: 10px 0 3px
-
-        span
-          font-size: 11px
-          color: #9CA7AF
-
-      .avatar
-        width: 8%
-        z-index: 1
-        position: relative
-        display: inline-table
-
-        &:hover
-          img
-            box-shadow: 0 0 10px rgba(100, 100, 100, 0.6)
-
-        img
-          border-radius: 50%
-          box-shadow: 0 0 5px rgba(100, 100, 100, 0.4)
-
-          &:before
-            content: ''
-            border: 1px solid $border-color
-
-
-      p
-        border: 1px solid $border-color
-
-        border-radius: 5px
-        line-height: 1.5
-        padding: 18px 22px
-        max-width: 64%
-        position: relative
-        word-wrap: break-word
+      .message
+        // Here we will have fun :D
+        color: #666666
+        max-width: calc(100% - 35px - 15px) // 100% - image width - margin left
+        padding: 10px
+        margin: 0 0 0 15px
+        float: left
+        line-height: 20px
+        background-color: $bubble-background
+        border-radius: 3px
         white-space: pre-line
 
-      &.person
-        color: #808080
-
-        .info
-          text-align: right
-
-        .avatar
-          padding: 10px 18px 0 3px
-
-          img
-            border: 3px solid #F3F3F3
-
-          img
-            float: right
+        position: relative
+        +border-radius(6px)
+        border: 2px solid $bubble-border
 
         p
-          background-color: #F3F3F3
-          left: -35px
+          margin: 0
+
+        .ribbon
+          position: absolute
+          bottom: -8px
+          left: -8px
+          color: #4DB364
+          width: 17px
+          height: 17px
+          +border-radius(50%)
+          background-color: $bubble-me-background
+          border: 2px solid $bubble-me-border
+          text-align: center
+          line-height: 15px
+          display: none
+
+        &.read
+          .ribbon
+            display: block
+
+
+        &:before, &:after
+          content: ''
+          position: absolute
+          border-style: solid
+          display: block
+          width: 0
+
+      section.message_infos
+        float: left
+        width: 100%
+        padding: 5px 50px 0
+        font-size: 11px
+        color: #999
+
+        span.author_name
+        span.sent_at
+
+
+      &.person
+        .message
+          &:after
+            border-width: 5px 5px 5px 0
+            border-color: transparent $bubble-background
+            display: block
+            left: -5px
+            top: 9px
+
+          &:before
+            border-width: 6px 6px 6px 0
+            border-color: transparent $bubble-border
+            display: block
+            left: -8px
+            top: 8px
 
       &.me
-        color: #60686D
-        justify-content: flex-end
+        .author_avatar_wrapper
+          float: right
 
-        .info
-          order: 3
-          text-align: left
+        .message
+          float: right
+          margin: 0 15px 0 0
+          background-color: $bubble-me-background
 
-        .avatar
-          order: 2
-          padding: 10px 3px 0 18px
+          &:after
+            border-width: 5px 0 5px 5px
+            border-color: transparent $bubble-me-background
+            display: block
+            right: -5px
+            top: 9px
 
-          img
-            border: 3px solid #E2F8FF
+          &:before
+            border-width: 6px 0 6px 6px
+            border-color: transparent $bubble-me-border
+            display: block
+            right: -8px
+            top: 8px
 
-        p
-          order: 1
-          // background-color: #E2F8FF
-          background-color: #F5FFFF
-          right: -35px
+        section.message_infos
+          text-align: right
