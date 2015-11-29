@@ -33,3 +33,42 @@ Meteor.publish('messages', function() {
     }]
   });
 });
+
+Meteor.publish('statuses', function() {
+  self = this;
+  friendships = FriendShipsCollection.find({
+    $or: [{
+      emitter: this.userId
+    }, {
+      receiver: this.userId
+    }]
+  }).fetch();
+
+  friends = friendships.map(function(friendship) {
+    if(friendship.emitter === self.userId) {
+      return Meteor.users.findOne({_id: friendship.receiver})._id;
+    } else {
+      return Meteor.users.findOne({_id: friendship.emitter})._id;
+    }
+  });
+
+  me = Meteor.users.findOne({_id: this.userId})._id;
+  friends.push(me);
+
+  statuses = StatusCollection.find({
+    authorId: {
+      $in: friends
+    }
+  });
+
+  return statuses;
+});
+
+Meteor.publish('comments', function(commentable) {
+  return CommentCollection.find({
+    commentable: {
+      commentableType: commentable.type,
+      commentableId: commentable.id
+    }
+  });
+});

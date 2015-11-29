@@ -35,3 +35,7 @@ coffeescript
 momentjs:moment
 universe:react-bootstrap
 lookback:emoji
+meteorhacks:npm
+
+
+npm-container

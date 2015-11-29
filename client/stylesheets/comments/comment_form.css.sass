@@ -1,0 +1,69 @@
+@import '{}/client/lib/compatibility/variables.css.sass'
+
+section.comments
+  height: auto
+  background-color: #FFF
+  width: 100%
+  float: left
+  position: relative
+  min-height: 50px
+
+  display: none
+
+  &.active
+    display: block
+
+  form
+    float: left
+    width: 100%
+    height: auto
+    position: relative
+    // bottom: 0
+    border-top: 1px solid $grey-background
+
+    textarea
+      width: 100%
+      height: 100%
+      border: none
+      color: #333
+      padding-left: 50px + 10px
+      padding-top: 15px
+      line-height: 20px
+
+      &::-webkit-input-placeholder // WebKit, Blink, Edge
+        color: #999
+
+      &:-moz-placeholder // Mozilla Firefox 4 to 18
+        color: #999
+        opacity:  1
+
+      &::-moz-placeholder // Mozilla Firefox 19+
+        color: #999
+        opacity:  1
+
+      &:-ms-input-placeholder // Internet Explorer 10-11
+        color: #999
+
+      &:focus
+        outline: none
+
+    span
+      // position: absolute
+      position: relative
+      // top: 0
+      // right: 0
+      // left: 0
+      // bottom: 0
+      text-align: right
+      line-height: 100%
+      float: left
+      width: 100%
+      height: 100%
+
+      &:before
+        content: "\f075"
+        position: absolute
+        font-family: FontAwesome
+        width: 50px
+        line-height: 49px
+        color: #999
