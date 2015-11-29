@@ -7,47 +7,61 @@
     else
       'person'
 
-  getEmitterName: ->
-    new User(@props.message.emitter).full_name
-
   getMessageStatus: ->
     if @props.message.read.read
       'read'
     else
       'unread'
 
-  renderReadIcon: ->
-    if @props.message.emitter is Meteor.userId()
-      <i className="fa fa-check #{ @getMessageStatus() }"
-         data-toggle='tooltip'
-         data-placement='left'
-         ref='tooltip_ago'
-         title={ @getReadAt() }></i>
-
   getReadAt: ->
-    if @props.message.read.read
-      moment(@props.message.read.readAt).calendar()
+    if @props.message.read.read and @props.message.emitter is Meteor.userId()
+      read_at = moment(@props.message.read.readAt).calendar()
+      tolower = read_at.charAt(0).toLowerCase() + read_at.slice(1)
+      <span className='ribbon'
+            ref='read_at'
+            data-placement='right'
+            title="Lu #{ tolower }">
+        ✓
+      </span>
 
   componentWillMount: ->
     if @props.message.receiver == Meteor.userId() && !@props.message.read.read
-      MessageCollection.update({_id: @props.message._id}, $set: {read: {read: true, readAt: new Date()}})
+      MessageCollection.update
+        _id: @props.message._id
+      , $set:
+        read:
+          read: true
+          readAt: new Date()
+
+  componentDidUpdate: ->
+    $(@refs.read_at).tooltip()
 
   componentDidMount: ->
-    $(@refs.timeago).timeago()
+    $(@refs.read_at).tooltip()
     $(@refs.paragraph).html(Emojis.parse($(@refs.paragraph).text()))
-    $(@refs.tooltip_ago).tooltip()
+
+  mixins: [ReactMeteorData]
+
+  getMeteorData: ->
+    author: Meteor.users.findOne({_id: @props.message.emitter})
 
   render: ->
-    <li id={@props.message._id} className="msgbox-message #{ @getMe() }">
-      <div className='info'>
-        <a href='#'>{ @getEmitterName() }</a>
-        <span ref='timeago' title="#{ @props.message.createdAt.toISOString() }"></span>
+    <li className={ @getMe() }>
+      <div className='author_avatar_wrapper'>
+        <img className='author_avatar'
+            src={ @data.author.profile.image } />
       </div>
-      <a href='#' className='avatar'>
-        <img width='35' src='https://placeholdit.imgix.net/~text?txtsize=12&txt=128%C3%97128&w=128&h=128'/>
-      </a>
-      <p ref='paragraph'>
-        { @props.message.message }
-      </p>
-      { @renderReadIcon() }
+
+      <div className="message #{ @getMessageStatus() }">
+        <p ref='paragraph'>
+          { @props.message.message }
+        </p>
+        { @getReadAt() }
+      </div>
+
+      <section className='message_infos'>
+        <span className='sent_at'>
+          { moment(@props.message.createdAt).calendar() }
+        </span>
+      </section>
     </li>

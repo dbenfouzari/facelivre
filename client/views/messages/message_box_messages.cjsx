@@ -32,7 +32,9 @@
 
       <div className='create_message'>
         <form onSubmit={ @handleSubmit } >
-          <textarea ref='new_message' className='message_entry'></textarea>
+          <img src={ Meteor.user().profile.image } />
+          <textarea ref='new_message' className='message_entry'
+                    placeholder='Write your message...'></textarea>
           <button type='submit' className='btn btn-submit'>Envoyer</button>
         </form>
       </div>

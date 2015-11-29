@@ -205,7 +205,9 @@ Schemas.Message = new SimpleSchema({
     type: Date,
     optional: false,
     autoValue: function() {
-      return new Date();
+      if(this.isInsert) {
+        return new Date();
+      }
     }
   }
 });
@@ -219,6 +221,11 @@ Schemas.Status = new SimpleSchema({
   authorId: {
     type: SimpleSchema.RegEx.Id,
     optional: false
+  },
+
+  likers: {
+    type: [SimpleSchema.RegEx.Id],
+    optional: true
   },
 
   createdAt: {

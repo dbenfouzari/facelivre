@@ -26,7 +26,16 @@
     _.map @data.statuses, (status) ->
       <Status key={ status._id } status={ status } />
 
+  # componentDidMount: ->
+  #   $('.news_feed_wrapper').masonry
+  #     itemSelector: '.status_wrapper'
+  #     columnWidth: 420
+
+  # componentDidUpdate: ->
+  #   $('.news_feed_wrapper').masonry 'layout'
+
   render: ->
     <div className='news_feed_wrapper'>
       { @renderStatuses() }
     </div>
+# <StatusForm />

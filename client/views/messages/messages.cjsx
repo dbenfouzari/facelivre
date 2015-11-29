@@ -6,10 +6,10 @@
 
   componentDidMount: ->
     $node = $(ReactDOM.findDOMNode(@))
-    setTimeout @createScrollBar, 800
-    setTimeout ->
-      $node.mCustomScrollbar('scrollTo', 'bottom')
-    , 500
+    # setTimeout @createScrollBar, 800
+    # setTimeout ->
+      # $node.mCustomScrollbar('scrollTo', 'bottom')
+    # , 500
 
   createScrollBar: ->
     node = ReactDOM.findDOMNode @
@@ -25,17 +25,17 @@
 
   componentDidUpdate: ->
     $node = $(ReactDOM.findDOMNode(@))
-    @destroyScrollBar()
-    setTimeout @createScrollBar, 100
-    setTimeout ->
-      $node.mCustomScrollbar('scrollTo', 'bottom', {scrollInertia: 0})
-    , 100
+    # @destroyScrollBar()
+    # setTimeout @createScrollBar, 100
+    # setTimeout ->
+      # $node.mCustomScrollbar('scrollTo', 'bottom', {scrollInertia: 0})
+    # , 100
 
   componentWillUnmount: ->
-    @destroyScrollBar()
+    # @destroyScrollBar()
 
   componentWillUpdate: ->
-    @destroyScrollBar()
+    # @destroyScrollBar()
 
   renderMessages: ->
     _.map @props.messages, (message) ->

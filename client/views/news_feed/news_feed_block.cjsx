@@ -2,7 +2,9 @@
   getDefaultProps: ->
     author: 'Author'
     image: 'http://placehold.it/40x40'
-    status: "Lorem ipsum Dolore ut ut laboris nostrud reprehenderit in ex ullamco culpa dolore consectetur aliquip eiusmod elit quis et laboris non Excepteur et veniam in irure sed eu quis laboris sint nostrud aute fugiat mollit aliquip et anim cupidatat sunt ea et aliquip voluptate consectetur Excepteur cillum do proident tempor minim id eiusmod sunt dolore nisi ut id ut."
+    content: "This is a sticky status update, it's really awesome for quick updates
+              and the comments are AJAX-ed so there's no waisting time on
+              reloading the page. Cool right?"
 
   render: ->
     <div className='news_feed_block' aria-label='Actualité'>

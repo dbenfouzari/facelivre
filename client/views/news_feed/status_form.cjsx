@@ -1,3 +1,3 @@
-@StatusForm = React.createClass
-  render: ->
-    <NewsFeedBlock />
+# @StatusForm = React.createClass
+#   render: ->
+#     <NewsFeedBlock />

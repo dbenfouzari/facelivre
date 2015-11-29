@@ -18,7 +18,7 @@ moment.locale('fr', {
         nextWeek: 'dddd [à] LT',
         lastDay: '[Hier à] LT',
         lastWeek: 'dddd [dernier à] LT',
-        sameElse: 'L'
+        sameElse: '[Le] L [à] LT'
     },
     relativeTime : {
         future : "dans %s",
