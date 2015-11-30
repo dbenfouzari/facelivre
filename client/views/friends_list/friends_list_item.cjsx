@@ -1,6 +1,11 @@
 @FriendsListItem = React.createClass
   displayName: 'FriendsListItem'
 
+  mixins: [ReactMeteorData]
+
+  getMeteorData: ->
+    active: Session.get('selected')
+
   componentDidMount: ->
     self = this
     $(ReactDOM.findDOMNode(@refs.tooltip_ago)).tooltip()
@@ -48,7 +53,10 @@
       Session.set 'selected', @props.friend._id
 
   getActive: ->
-    if @props.active then 'active' else ''
+    if @data.active and @data.active is @props.friend._id
+      'active'
+    else
+      ''
 
   renderNewMessages: ->
     me = new User(Meteor.userId())
@@ -60,13 +68,12 @@
 
   render: ->
     <li className={ @getActive() }>
-      <Link to="#" data-toggle='tooltip'
+      <Link to="/messages/#{ @props.friend._id }" data-toggle='tooltip'
                    data-placement='left'
                    className='tooltip_ago'
                    ref='tooltip_ago'
                    title="Était en ligne #{ @getLastSeen() }"
-                   data-original-title="Était en ligne #{ @getLastSeen() }"
-                   onClick={ @handleClick }>
+                   data-original-title="Était en ligne #{ @getLastSeen() }" >
 
         { @renderNewMessages() }
 

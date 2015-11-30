@@ -7,10 +7,10 @@
     toggled: Session.get('sidebar-toggled')
 
   getToggled: ->
-    if @data.toggled is false
-      ''
-    else
+    if @data.toggled
       'toggled'
+    else
+      ''
 
   renderLogin: ->
     <div>

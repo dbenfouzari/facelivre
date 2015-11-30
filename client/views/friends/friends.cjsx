@@ -18,9 +18,14 @@
       <Friend key={ friend._id } friend={ friend } />
 
   render: ->
-    <Masonry className={'friends'}
-             elementType={'ul'}
-             options={@getMasonryOptions()} >
+    <div>
       <FriendsSearchForm />
-      { @renderFriends() }
-    </Masonry>
+
+      <h1>Your friends</h1>
+
+      <Masonry className={'friends'}
+               elementType={'ul'}
+               options={@getMasonryOptions()} >
+        { @renderFriends() }
+      </Masonry>
+    </div>
