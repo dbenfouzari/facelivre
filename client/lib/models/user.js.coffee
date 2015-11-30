@@ -18,9 +18,18 @@
     ].join(' ')
 
   getFriends: ->
-    friends = FriendShipsCollection.find().fetch()
-    if friends.length > 0
-      return friends
+    friendships = FriendShipsCollection.find().fetch()
+    if friendships.length > 0
+      users = _.map friendships, (friendship) ->
+        emitter  = Meteor.users.findOne({ _id: friendship.emitter })
+        receiver = Meteor.users.findOne({ _id: friendship.receiver })
+
+        if friendship.emitter is Meteor.userId()
+          Meteor.users.findOne({_id: friendship.receiver})
+        else
+          Meteor.users.findOne({_id: friendship.emitter})
+
+      users
     else
       []
 

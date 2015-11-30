@@ -6,7 +6,7 @@ Meteor.startup(function() {
     <Route path='/' component={ Facelivre } >
       <IndexRoute component={ NewsFeed } />
       <Route path='/feed' component={ NewsFeed } />
-      <Route path='/friends' />
+      <Route path='/friends' component={ Friends } />
       <Route path='/messages' />
       <Route path='/:id' component={ Profile } />
     </Route>

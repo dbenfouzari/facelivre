@@ -16,16 +16,8 @@
   renderFriends: ->
     self = @
     _.map @data.friends, (friend) ->
-      emitter  = friend.emitter
-      receiver = friend.receiver
-
-      concerned = if emitter is Meteor.userId()
-        receiver
-      else if receiver is Meteor.userId()
-        emitter
-
-      active = self.data.active_friend is concerned
-      <Friend key={ friend._id } friendship={ friend } active={ active } />
+      active = self.data.active_friend is friend
+      <FriendsListItem key={ friend._id } friend={ friend } active={ active } />
 
   render: ->
     <div className='friends_list_wrapper'>

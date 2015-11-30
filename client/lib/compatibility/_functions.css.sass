@@ -6,8 +6,36 @@
 }
 
 @mixin transition($opts) {
-  -webkit-transition: all 0.5s ease;
-  -moz-transition:    all 0.5s ease;
-  -o-transition:      all 0.5s ease;
-  transition:         all 0.5s ease;
+  -webkit-transition: $opts;
+  -moz-transition:    $opts;
+  -o-transition:      $opts;
+  transition:         $opts;
+}
+
+@mixin transform($opts) {
+  -webkit-transform: $opts;
+  -moz-transform:    $opts;
+  -o-transform:      $opts;
+  transform:         $opts;
+}
+
+@mixin perspective($opts) {
+  -webkit-perspective: $opts;
+  -moz-perspective:    $opts;
+  -o-perspective:      $opts;
+  perspective:         $opts;
+}
+
+@mixin transform-style($opts) {
+  -webkit-transform-style: $opts;
+  -moz-transform-style:    $opts;
+  -o-transform-style:      $opts;
+  transform-style:         $opts;
+}
+
+@mixin backface-visibility($opts) {
+  -webkit-backface-visibility: $opts;
+  -moz-backface-visibility:    $opts;
+  -o-backface-visibility:      $opts;
+  backface-visibility:         $opts;
 }
