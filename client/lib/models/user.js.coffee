@@ -8,6 +8,7 @@
     @friends   = @getFriends()
     @full_name = @getFullName()
     @profile_picture = @getProfilePicture()
+    @cover_picture = @getCoverPicture()
     @new_messages = @getNewMessages()
 
   getFullName: ->
@@ -34,3 +35,9 @@
       @meteor_collection.profile.image
     else
       "https://placeholdit.imgix.net/~text?txtsize=50&txt=Picture&w=160&h=160"
+
+  getCoverPicture: ->
+    if @meteor_collection.profile.cover
+      @meteor_collection.profile.cover
+    else
+      @getProfilePicture()

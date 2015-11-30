@@ -1,23 +1,17 @@
 @Facelivre = React.createClass
-  # render: ->
-  #   <div>
-  #     <NavBar />
-  #     <div className='container news_feed_container'>
-  #       <div className='row'>
-  #         <div className='col-lg-2'>
-  #         </div>
-  #         <div className='col-lg-7'>
-  #           { @props.children }
-  #         </div>
-  #         <div className='col-lg-3'>
-  #         </div>
-  #       </div>
-  #     </div>
-  #     <MessagesWrapper />
-  #     <FriendsList />
-  #   </div>
 
-  render: ->
+  mixins: [ReactMeteorData]
+
+  getMeteorData: ->
+    user: Meteor.user()
+
+  renderLogin: ->
+    <div>
+      <NavBar />
+      <LoginPage />
+    </div>
+
+  renderNews: ->
     <div>
       <NavBar />
       <div className='container-fluid news_feed_container'>
@@ -27,3 +21,8 @@
       <FriendsList />
     </div>
 
+  render: ->
+    if @data.user
+      @renderNews()
+    else
+      @renderLogin()
