@@ -1,12 +1,9 @@
 @SideBar = React.createClass
   displayName: "SideBar"
 
-  togglePin: (e) ->
-    e.preventDefault()
-    Session.set 'sidebar-toggled', !Session.get('sidebar-toggled')
-
+  # <div id='navbar-collapsable' className='collapse navbar-collapse'>
   render: ->
-    <nav className='sidebar_wrapper'>
+    <nav id='navbar-collapsable' className='sidebar_wrapper'>
       <ul className='sidebar'>
         <SideNavLink to='/feed' className='nav-feed'>
           Feed
@@ -20,10 +17,5 @@
         <SideNavLink to='/messages' className='nav-messages'>
           Messages
         </SideNavLink>
-        <li className='pin-sidebar'>
-          <a href='#' title='Pin Sidebar' onClick={ @togglePin }>
-            <i className='fa fa-thumb-tack'></i>
-          </a>
-        </li>
       </ul>
     </nav>

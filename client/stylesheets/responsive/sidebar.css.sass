@@ -1,0 +1,22 @@
+@import '{}/client/lib/compatibility/variables.css.sass'
+@import '{}/client/stylesheets/responsive/variables.css.sass'
+
+.news_feed_container
+  .sidebar_wrapper
+    width: $sidebar-min-width
+
+    @media screen and (max-width: $screen-xs-max)
+      width: 0
+
+    &:hover
+      @media screen and (max-width: $screen-md-max)
+        width: $sidebar-full-width
+
+  &.toggled
+    .sidebar_wrapper
+      @media screen and (max-width: $screen-xs-max)
+        width: $sidebar-min-width
+
+      &:hover
+        @media screen and (max-width: $screen-xs-max)
+          width: $sidebar-full-width
