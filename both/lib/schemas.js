@@ -110,26 +110,6 @@ Schemas.User = new SimpleSchema({
   }
 });
 
-Schemas.News = new SimpleSchema({
-  content: {
-    type: String,
-    optional: false
-  },
-
-  author: {
-    type: String, // Just the ID...
-    optional: false
-  },
-
-  createdAt: {
-    type: Date,
-    optional: false,
-    autoValue: function() {
-      return new Date();
-    }
-  }
-});
-
 Schemas.FriendShip = new SimpleSchema({
   emitter: {
     type: String, // User ID

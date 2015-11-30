@@ -12,10 +12,6 @@ Meteor.publish('friendships', function(user_id) {
   });
 });
 
-Meteor.publish('news', function() {
-  return NewsCollection.find();
-});
-
 Meteor.publish('profiles', function() {
   return ProfileCollection.find();
 });
@@ -57,16 +53,14 @@ Meteor.publish('statuses', function() {
     me = Meteor.users.findOne({_id: this.userId})._id;
     friends.push(me);
 
-    statuses = StatusCollection.find({
+    return StatusCollection.find({
       authorId: {
         $in: friends
       }
     });
   } else {
-    statuses = []
+    return [];
   }
-
-  return statuses;
 });
 
 Meteor.publish('comments', function(commentable) {
