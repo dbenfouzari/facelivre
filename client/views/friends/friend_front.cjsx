@@ -30,7 +30,9 @@
       </main>
 
       <footer>
-        <a href='#' className='right' onClick={ @props.onFollow }>Follow</a>
+        <a href='#' className='right' onClick={ this.props.onFollow }>
+          { this.props.followLink }
+        </a>
         <a href='#' className='left'  onClick={ @props.onFlip }>+ infos</a>
       </footer>
     </div>

@@ -6,7 +6,9 @@
       Coucou
 
       <footer>
-        <a href='#' className='right' onClick={ @props.onFollow }>Follow</a>
+        <a href='#' className='right' onClick={ @props.onFollow }>
+          { @props.followLink }
+        </a>
         <a href='#' className='left'  onClick={ @props.onFlip }>-</a>
       </footer>
     </div>

@@ -27,11 +27,20 @@
     $el = $(ReactDOM.findDOMNode(@))
     $el.toggleClass 'hovered'
 
+  followLink: ->
+    if @data.friendship then 'Unfollow' else 'Follow'
+
   render: ->
 
     <li className='friend'>
       <div className='card'>
-        <FriendFront friend={ @props.friend } onFollow={ @handleFollow } onFlip={ @triggerFlip }/>
-        <FriendBack onFollow={ @handleFollow } onFlip={ @triggerFlip }/>
+        <FriendFront followLink={ @followLink() }
+                     friend={ @props.friend }
+                     onFollow={ @handleFollow }
+                     onFlip={ @triggerFlip }/>
+
+        <FriendBack followLink={ @followLink() }
+                    onFollow={ @handleFollow }
+                    onFlip={ @triggerFlip }/>
       </div>
     </li>
