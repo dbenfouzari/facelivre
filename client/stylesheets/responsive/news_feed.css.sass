@@ -2,3 +2,11 @@
 @import '{}/client/stylesheets/responsive/variables.css.sass'
 
 .news_feed_container
+  padding-right: $friends-list-width + 15px // FriendsList + default padding
+  padding-left: $sidebar-min-width + 15px
+
+  @media screen and (max-width: $screen-sm-max)
+    padding-right: 45px // FriendsList mini + default padding
+    padding-left: 15px
+
+  .news_feed_wrapper
