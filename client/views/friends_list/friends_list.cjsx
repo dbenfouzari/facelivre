@@ -8,16 +8,13 @@
   getMeteorData: ->
     current_user_id = Meteor.userId()
 
-    return(
-      friends: new User(current_user_id).friends
-      active_friend: Session.get('selected')
-    )
+    friends: new User(current_user_id).friends
 
   renderFriends: ->
     self = @
     _.map @data.friends, (friend) ->
       active = self.data.active_friend is friend
-      <FriendsListItem key={ friend._id } friend={ friend } active={ active } />
+      <FriendsListItem key={ friend._id } friend={ friend } />
 
   render: ->
     <div className='friends_list_wrapper'>

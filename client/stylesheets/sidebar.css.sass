@@ -2,14 +2,14 @@
 @import '{}/client/lib/compatibility/variables.css.sass'
 
 .news_feed_container
-  margin-left: 70px
+  margin-left: $sidebar-off-width
   +transition(all 0.5s ease)
 
   .sidebar_wrapper
     z-index: 1
     position: fixed
     left: $sidebar-width
-    width: 70px
+    width: $sidebar-off-width
     height: 100%
     top: 40px
     margin-left: -$sidebar-width
@@ -38,7 +38,7 @@
         &.pin-sidebar
           position: fixed
           bottom: 0
-          width: 70px
+          width: $sidebar-off-width
           background-color: darken($sidebar-bg-color, 10%)
           +transition(all 0.5s ease)
 

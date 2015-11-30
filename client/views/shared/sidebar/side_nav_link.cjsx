@@ -1,12 +1,10 @@
 @SideNavLink = React.createClass
   displayName: "SideNavLink"
-  contextTypes:
-    location: React.PropTypes.object
-    history: React.PropTypes.object
+
+  mixins: [History]
 
   render: ->
-    history = this.context.history
-    isActive = history.isActive(this.props.to, this.props.params, this.props.query)
+    isActive = this.history.isActive(this.props.to, this.props.query, false)
 
     return (
       <li className={if isActive then 'active' else null}>
