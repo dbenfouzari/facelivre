@@ -1,8 +1,12 @@
 @import '{}/client/lib/compatibility/variables.css.sass'
 @import '{}/client/lib/compatibility/functions.css.sass'
 
+.news_feed_container.toggled
+  & + * .messages_wrapper
+    width: calc(100% - #{$friends-list-width} - #{$sidebar-width} - 10px)
+
 .messages_wrapper
-  width: calc(100% - #{$friends-list-width} - 10px)
+  width: calc(100% - #{$friends-list-width} - #{$sidebar-off-width} - 10px)
   height: calc(100% - 70px)
   margin-top: 50px
   margin-right: 250px - 1px // FriendsList width
@@ -12,6 +16,7 @@
   position: fixed
   top: 0
   right: 0
+  +transition(width .5s ease)
 
   .msgbox-container
     position: relative
