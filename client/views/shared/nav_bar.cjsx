@@ -1,5 +1,3 @@
-{ Link } = ReactRouter
-
 @NavBar = React.createClass
   render: ->
     <nav className='navbar navbar-default navbar-fixed-top'>

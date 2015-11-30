@@ -4,6 +4,13 @@
 
   getMeteorData: ->
     user: Meteor.user()
+    toggled: Session.get('sidebar-toggled')
+
+  getToggled: ->
+    if @data.toggled is false
+      ''
+    else
+      'toggled'
 
   renderLogin: ->
     <div>
@@ -14,7 +21,8 @@
   renderNews: ->
     <div>
       <NavBar />
-      <div className='container-fluid news_feed_container'>
+      <div className="container-fluid news_feed_container #{ @getToggled() }">
+        <SideBar/>
         { @props.children }
       </div>
       <MessagesWrapper />

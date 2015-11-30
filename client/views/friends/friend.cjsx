@@ -1,5 +1,3 @@
-{ Link } = ReactRouter
-
 @Friend = React.createClass
 
   mixins: [ReactMeteorData]
