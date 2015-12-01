@@ -1,0 +1,26 @@
+@import '{}/client/lib/compatibility/variables.css.sass'
+@import '{}/client/lib/compatibility/functions.css.sass'
+@import '{}/client/stylesheets/responsive/variables.css.sass'
+
+.news_feed_container.toggled
+  & + * .messages_wrapper
+    width: calc(100% - 30px - #{$sidebar-min-width} - 10px)
+
+.messages_wrapper
+  @media screen and (max-width: $screen-xs-max)
+    width: calc(100% - 30px - 10px) // 30px : friends list minimized
+    margin-right: 30px
+
+    .msgbox-container
+      flex-direction: column
+      min-width: 0
+
+      .msgbox-messages-container
+        max-width: 100%
+
+      #message-box-profile
+        display: none
+
+  @media screen and (max-width: $screen-sm-max)
+    width: calc(100% - 30px - #{$sidebar-min-width} - 10px) // 30px : friends list minimized
+    margin-right: 30px
