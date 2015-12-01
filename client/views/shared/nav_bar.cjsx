@@ -1,20 +1,23 @@
 @NavBar = React.createClass
+  handleSidebar: ->
+    Session.set 'sidebar-toggled', !Session.get('sidebar-toggled')
+
   render: ->
     <nav className='navbar navbar-default navbar-fixed-top'>
       <div className='container'>
         <div className='navbar-header'>
-          <button className='navbar-toggle collapsed' type='button'
-            data-toggle='collapse' data-target='#navbar-collapsable'
-            aria-expended='false'>
+          <button className='navbar-toggle collapsed'
+                  type='button'
+                  onClick={ @handleSidebar }>
             <span className='icon-bar'/>
             <span className='icon-bar'/>
             <span className='icon-bar'/>
           </button>
 
-          <Link to='/' className='navbar-brand'>F</Link>
+          <Link to='/' className='navbar-brand'>Facelivre</Link>
         </div>
 
-        <div id='navbar-collapsable' className='collapse navbar-collapse'>
+        <div>
           <NavbarLinks/>
         </div>
       </div>

@@ -3,10 +3,10 @@
 
 .news_feed_container.toggled
   & + * .messages_wrapper
-    width: calc(100% - #{$friends-list-width} - #{$sidebar-width} - 10px)
+    width: calc(100% - #{$friends-list-width} - #{$sidebar-full-width} - 10px)
 
 .messages_wrapper
-  width: calc(100% - #{$friends-list-width} - #{$sidebar-off-width} - 10px)
+  width: calc(100% - #{$friends-list-width} - #{$sidebar-min-width} - 10px)
   height: calc(100% - 70px)
   margin-top: 50px
   margin-right: 250px - 1px // FriendsList width

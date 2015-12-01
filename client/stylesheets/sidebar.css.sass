@@ -2,29 +2,29 @@
 @import '{}/client/lib/compatibility/variables.css.sass'
 
 .news_feed_container
-  margin-left: $sidebar-off-width
+  // margin-left: $sidebar-min-width
   +transition(all 0.5s ease)
 
   .sidebar_wrapper
     z-index: 1
     position: fixed
-    left: $sidebar-width
-    width: $sidebar-off-width
+    left: $sidebar-full-width
+    // width: $sidebar-min-width
     height: 100%
     top: 40px
-    margin-left: -$sidebar-width
+    margin-left: -$sidebar-full-width
     overflow-y: auto
     background-color: $sidebar-bg-color
     +transition(all 0.5s ease)
 
     &:hover
-      // width: $sidebar-width
-      // box-shadow: 5px 0 15px rgba(0, 0, 0, .3)
+      // width: $sidebar-full-width
+      box-shadow: 5px 0 15px rgba(0, 0, 0, .3)
 
     .sidebar
       position: absolute
       top: 0
-      width: $sidebar-width
+      width: $sidebar-full-width
       margin: 0
       padding: 0
       list-style: none
@@ -34,36 +34,6 @@
         line-height: $sidebar-link-height
         height: $sidebar-link-height
         color: #999
-
-        &.pin-sidebar
-          position: fixed
-          bottom: 0
-          width: $sidebar-off-width
-          background-color: darken($sidebar-bg-color, 10%)
-          +transition(all 0.5s ease)
-
-          a
-            display: block
-            width: 100%
-
-            i
-              position: relative
-              display: block
-              margin: 0 auto
-              width: 50px
-              height: $sidebar-link-height
-              line-height: $sidebar-link-height
-
-              &:after
-                content: ''
-                display: block
-                width: 30px
-                height: 30px
-                border-radius: 50%
-                border: 2px solid #CCC
-                position: absolute
-                top: 14px
-                left: 10px
 
         &.active, &:hover
           a
@@ -94,7 +64,7 @@
 
           &.nav-feed
             &:before
-              content: '\f0c9'
+              content: '\f1ea'
 
           &.nav-friends
             &:before
@@ -105,13 +75,7 @@
               content: '\f0e6'
 
   &.toggled
-    margin-left: $sidebar-width
+    padding-left: 15px + $sidebar-min-width
 
     .sidebar_wrapper
-      width: $sidebar-width
-
-      // &:hover
-      //   box-shadow: none
-
-      li.pin-sidebar
-        width: $sidebar-width
+      // width: $sidebar-full-width
