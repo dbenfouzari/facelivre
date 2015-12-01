@@ -25,7 +25,12 @@ Schemas.Profile = new SimpleSchema({
   image: {
     type: String,
     optional: true
-  }
+  },
+
+  cover: {
+    type: String,
+    optional: true
+  },
 });
 
 Schemas.UserStatusLogin = new SimpleSchema({
