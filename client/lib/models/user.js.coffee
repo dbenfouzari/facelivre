@@ -10,6 +10,12 @@
     @profile_picture = @getProfilePicture()
     @cover_picture = @getCoverPicture()
     @new_messages = @getNewMessages()
+    @address = @getAddress()
+
+  getAddress: ->
+    uac = UserAddressCollection.findOne({user: @id})
+    if uac
+      AddressCollection.findOne({_id: uac.address })
 
   getFullName: ->
     [

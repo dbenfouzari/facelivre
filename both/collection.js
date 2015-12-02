@@ -13,4 +13,10 @@ StatusCollection.attachSchema(Schemas.Status);
 CommentCollection = new Mongo.Collection('comments');
 CommentCollection.attachSchema(Schemas.Comment);
 
+AddressCollection = new Mongo.Collection('addresses');
+AddressCollection.attachSchema(Schemas.Address);
+
+UserAddressCollection = new Mongo.Collection('users_addresses');
+UserAddressCollection.attachSchema(Schemas.UserAddress);
+
 Meteor.users.attachSchema(Schemas.User);
