@@ -7,7 +7,7 @@
         <SideNavLink to='/feed' className='nav-feed'>
           Feed
         </SideNavLink>
-        <SideNavLink to="/#{Meteor.user().username}" className='nav-profile'>
+        <SideNavLink to="/#{Meteor.user().slug}" className='nav-profile'>
           Profile
         </SideNavLink>
         <SideNavLink to='/friends' className='nav-friends'>
