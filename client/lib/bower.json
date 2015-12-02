@@ -1,0 +1,11 @@
+{
+  "name": "facelivre",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery.scrollTo": "2.1.2"
+  },
+  "ignoredDependencies": [
+    "jquery"
+  ],
+  "private": true
+}

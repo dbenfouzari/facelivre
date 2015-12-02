@@ -1,5 +1,44 @@
 Schemas = {};
 
+Schemas.Addressable = new SimpleSchema({
+  type: {
+    type: SimpleSchema.RegEx.Id,
+    optional: false
+  },
+
+  id: {
+    type: SimpleSchema.RegEx.Id,
+    optional: false
+  }
+});
+
+Schemas.Address = new SimpleSchema({
+  street_number: {
+    type: String,
+    optional: false
+  },
+
+  route: {
+    type: String,
+    optional: false
+  },
+
+  city: {
+    type: String,
+    optional: false
+  },
+
+  postal_code: {
+    type: String,
+    optional: false
+  },
+
+  country: {
+    type: String,
+    optional: false
+  }
+});
+
 Schemas.Profile = new SimpleSchema({
   first_name: {
     type: String,
@@ -112,6 +151,18 @@ Schemas.User = new SimpleSchema({
   status: {
     type: Schemas.UserStatus,
     optional: true
+  }
+});
+
+Schemas.UserAddress = new SimpleSchema({
+  user: {
+    type: SimpleSchema.RegEx.Id,
+    optional: false
+  },
+
+  address: {
+    type: SimpleSchema.RegEx.Id,
+    optional: false
   }
 });
 

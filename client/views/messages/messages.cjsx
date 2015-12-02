@@ -4,12 +4,15 @@
   destroyScrollBar: ->
     $(ReactDOM.findDOMNode(@)).mCustomScrollbar 'destroy'
 
+  scrollToBottom: ->
+    $node = $(ReactDOM.findDOMNode(@))
+    $node.scrollTo $node.children().last(), 500,
+      interrupt: true
+
   componentDidMount: ->
     $node = $(ReactDOM.findDOMNode(@))
-    # setTimeout @createScrollBar, 800
-    # setTimeout ->
-      # $node.mCustomScrollbar('scrollTo', 'bottom')
-    # , 500
+
+    @scrollToBottom()
 
   createScrollBar: ->
     node = ReactDOM.findDOMNode @
@@ -25,17 +28,7 @@
 
   componentDidUpdate: ->
     $node = $(ReactDOM.findDOMNode(@))
-    # @destroyScrollBar()
-    # setTimeout @createScrollBar, 100
-    # setTimeout ->
-      # $node.mCustomScrollbar('scrollTo', 'bottom', {scrollInertia: 0})
-    # , 100
-
-  componentWillUnmount: ->
-    # @destroyScrollBar()
-
-  componentWillUpdate: ->
-    # @destroyScrollBar()
+    @scrollToBottom()
 
   renderMessages: ->
     _.map @props.messages, (message) ->

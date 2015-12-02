@@ -65,39 +65,6 @@ Meteor.publish('statuses', function() {
   });
 });
 
-// Meteor.publish('statuses', function() {
-//   self = this;
-
-//   if(this.userId) {
-//     friendships = FriendShipsCollection.find({
-//       $or: [{
-//         emitter: this.userId
-//       }, {
-//         receiver: this.userId
-//       }]
-//     }).fetch();
-
-//     friends = friendships.map(function(friendship) {
-//       if(friendship.emitter === self.userId) {
-//         return Meteor.users.findOne({_id: friendship.receiver})._id;
-//       } else {
-//         return Meteor.users.findOne({_id: friendship.emitter})._id;
-//       }
-//     });
-
-//     me = Meteor.users.findOne({_id: this.userId})._id;
-//     friends.push(me);
-
-//     return StatusCollection.find({
-//       authorId: {
-//         $in: friends
-//       }
-//     });
-//   } else {
-//     return [];
-//   }
-// });
-
 Meteor.publish('comments', function(commentable) {
   return CommentCollection.find({
     commentable: {
@@ -105,4 +72,12 @@ Meteor.publish('comments', function(commentable) {
       commentableId: commentable.id
     }
   });
+});
+
+Meteor.publish('addresses', function() {
+  return AddressCollection.find()
+});
+
+Meteor.publish('users_addresses', function() {
+  return UserAddressCollection.find()
 });
