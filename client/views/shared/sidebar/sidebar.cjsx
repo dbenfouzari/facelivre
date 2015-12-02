@@ -1,14 +1,13 @@
 @SideBar = React.createClass
   displayName: "SideBar"
 
-  # <div id='navbar-collapsable' className='collapse navbar-collapse'>
   render: ->
     <nav id='navbar-collapsable' className='sidebar_wrapper'>
       <ul className='sidebar'>
         <SideNavLink to='/feed' className='nav-feed'>
           Feed
         </SideNavLink>
-        <SideNavLink to="/#{Meteor.userId()}" className='nav-profile'>
+        <SideNavLink to="/#{Meteor.user().username}" className='nav-profile'>
           Profile
         </SideNavLink>
         <SideNavLink to='/friends' className='nav-friends'>

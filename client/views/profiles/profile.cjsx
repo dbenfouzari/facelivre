@@ -1,52 +1,28 @@
 @Profile = React.createClass
   mixins: [ReactMeteorData]
 
+  getDefaultProps: ->
+    params: {}
+    profile:
+      slug: null
+
   getMeteorData: ->
-    id = if Session.get('selected') then Session.get('selected') else @props.params.id
+    id = @props.profile.slug or @props.params.user_slug
 
     user: Meteor.users.findOne
-      _id: id
+      slug: id
 
-  getMapDims: ->
-    width = $('.profile_map').width()
-    height = $('.profile_picture_wrapper').height()
-
-    [width, height].join('x')
-
-  componentDidMount: ->
-    map_dims = @getMapDims()
-    link = "http://maps.googleapis.com/maps/api/staticmap?center=60+Rue+Saint+Jacques+59200+Tourcoing+France&zoom=13&size=#{map_dims}&key=AIzaSyCp9hc_oaRsmVV7UDA1utGlf_pq125SVho"
-    img = $("<img src='#{link}'/>")
-
-    $('.profile_map').prepend img
-
-  render: ->
+  renderContent: ->
     user = new User(@data.user._id)
-
-    <div data-mcs-theme='minimal-dark'
-         data-mcs-axis='y'
-         className='mCustomScrollbar profile'>
-      <div className='profile-header'>
-        <figure className='profile-cover'
-                style={{backgroundImage: "url(#{user.cover_picture})" }} >
-        </figure>
-        <figure className='profile-profilePic'>
-          <img src={ user.profile_picture } />
-        </figure>
-        <span className='profile-name'>
-          { user.full_name }
-        </span>
-      </div>
-    </div>
 
     <div className='profile'>
       <header>
-
         <div className='profile_picture_wrapper'>
           <img src={ user.profile_picture } />
         </div>
 
         <div className='profile_map'>
+          <img src="http://maps.googleapis.com/maps/api/staticmap?center=60+Rue+Saint+Jacques+59200+Tourcoing+France&zoom=13&size=400x180&key=AIzaSyCp9hc_oaRsmVV7UDA1utGlf_pq125SVho"/>
           <div className='profile_address'>
             <div>Tourcoing, <br/>59200 France</div>
           </div>
@@ -87,7 +63,19 @@
 
         <div className='profile_infos_container'>
           <div className='profile_infos'>
-            <h1 className='profile_username'>Donovan Benfouzari</h1>
+            <Editable allowedId={ @data.user._id }
+                      name='profile.first_name'
+                      collection={ Meteor.users }
+                      id={ @data.user._id } >
+              <h1 className='profile_username'>{ @data.user.profile.first_name }</h1>
+            </Editable>
+            <Editable allowedId={ @data.user._id }
+                      name='profile.last_name'
+                      collection={ Meteor.users }
+                      id={ @data.user._id } >
+              <h1 className='profile_username'>{ @data.user.profile.last_name }</h1>
+            </Editable>
+            <br/>
             <span className='birthday'>
               <i className='fa fa-gift'></i>11 November 1991
             </span>
@@ -100,3 +88,9 @@
 
       </header>
     </div>
+
+  render: ->
+    if @data.user
+      @renderContent()
+    else
+      <p>Loading...</p>

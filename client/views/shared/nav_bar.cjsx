@@ -17,8 +17,6 @@
           <Link to='/' className='navbar-brand'>Facelivre</Link>
         </div>
 
-        <div>
-          <NavbarLinks/>
-        </div>
+        <NavbarLinks/>
       </div>
     </nav>

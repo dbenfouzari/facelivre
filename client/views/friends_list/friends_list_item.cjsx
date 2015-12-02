@@ -44,16 +44,8 @@
   getTimeAgo: ->
     $.timeago @getLastSeen()
 
-  handleClick: (e) ->
-    e.preventDefault()
-
-    if Session.get('selected') and Session.get('selected') is @props.friend._id
-      Session.set 'selected', null
-    else
-      Session.set 'selected', @props.friend._id
-
   getActive: ->
-    if @data.active and @data.active is @props.friend._id
+    if @data.active and @data.active is @props.friend.slug
       'active'
     else
       ''
@@ -68,7 +60,7 @@
 
   render: ->
     <li className={ @getActive() }>
-      <Link to="/messages/#{ @props.friend._id }" data-toggle='tooltip'
+      <Link to="/messages/#{ @props.friend.slug }" data-toggle='tooltip'
                    data-placement='left'
                    className='tooltip_ago'
                    ref='tooltip_ago'

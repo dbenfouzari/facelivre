@@ -18,10 +18,13 @@
       AddressCollection.findOne({_id: uac.address })
 
   getFullName: ->
-    [
-      @meteor_collection.profile.first_name,
-      @meteor_collection.profile.last_name
-    ].join(' ')
+    if @meteor_collection.profile.first_name
+      [
+        @meteor_collection.profile.first_name,
+        @meteor_collection.profile.last_name
+      ].join(' ')
+    else
+      @meteor_collection.username
 
   getFriends: ->
     friendships = FriendShipsCollection.find().fetch()

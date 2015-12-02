@@ -5,7 +5,7 @@
 
   getMeteorData: ->
     selected: Session.get('selected')
-    friend: Meteor.users.findOne({_id: Session.get('selected')})
+    friend: Meteor.users.findOne({slug: Session.get('selected')})
 
   getDisplay: ->
     if @data.selected && @data.friend

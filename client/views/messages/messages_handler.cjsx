@@ -3,7 +3,7 @@
 
   set_var: (props) ->
     props = if props then props else @props
-    href_user_id = props.params.user_id
+    href_user_id = props.params.user_slug
 
     if href_user_id
       Session.set 'selected', href_user_id

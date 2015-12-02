@@ -151,6 +151,10 @@ Schemas.User = new SimpleSchema({
   status: {
     type: Schemas.UserStatus,
     optional: true
+  },
+
+  slug: {
+    type: String
   }
 });
 

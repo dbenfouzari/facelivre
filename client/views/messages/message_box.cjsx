@@ -3,6 +3,6 @@
 
   render: ->
     <div className='msgbox-container'>
-      <MessageBoxProfile  profile={ @props.with } />
+      <Profile profile={ @props.with } />
       <MessageBoxMessages with={    @props.with } />
     </div>

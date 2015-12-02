@@ -20,3 +20,4 @@ UserAddressCollection = new Mongo.Collection('users_addresses');
 UserAddressCollection.attachSchema(Schemas.UserAddress);
 
 Meteor.users.attachSchema(Schemas.User);
+Meteor.users.friendlySlugs('username');
