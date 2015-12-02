@@ -5,9 +5,18 @@
     editing: false
     previousText: ''
 
+  getDefaultProps: ->
+    type: 'String'
+
   humanizeField: ->
     field = @props.name
     field.replace(/_|\.|-/g, ' ')
+
+  formatShownToFormatted: (string) ->
+    moment(string, 'DD MMM YYYY').format('YYYY-MM-DD')
+
+  formatFormattedToDate: (string) ->
+    new Date moment(string, 'YYYY-MM-DD')
 
   handleClick: (e) ->
     self = this
@@ -15,7 +24,20 @@
     if $(@refs.editable).hasClass 'editable'
       unless @state.editing
         $el = $(@refs.editable)
-        previousText = $el.children().text()
+        previousText = if $el.children().length > 0
+          $el.children().text()
+        else
+          $el.text()
+
+        if @props.type is 'Date'
+          previousText = @formatShownToFormatted(previousText)
+          $input = $("<input class='editable-input' value='#{previousText}' type='date'>")
+
+        else if @props.type is 'Phone'
+          $input = $("<input class='editable-input' value='#{previousText}' type='tel'>")
+
+        else
+          $input = $("<input class='editable-input' value='#{previousText}'/>")
 
         $container = $("<div class='editable-container'>
           <h3 class='editable-title'>Enter #{@humanizeField(@props.name)}</h3>
@@ -25,7 +47,7 @@
         $form = $("<form class='editable-form'></form>")
 
         $buttons = $('<div></div>')
-        $input = $("<input class='editable-input' value='#{previousText}'/>")
+        # $input = $("<input class='editable-input' value='#{previousText}'/>")
         $submit = $("<button type='submit' class='btn btn-primary editable-submit'>Go</button>")
 
         $container.append $arrow
@@ -46,6 +68,9 @@
         $form.submit (e) ->
           e.preventDefault()
           value = $input.val()
+
+          if self.props.type is 'Date'
+            value = self.formatFormattedToDate(value)
 
           if value != previousText
             obj = {}

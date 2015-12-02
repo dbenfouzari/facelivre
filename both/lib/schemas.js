@@ -55,6 +55,11 @@ Schemas.Profile = new SimpleSchema({
     optional: true
   },
 
+  phone: {
+    type: String,
+    optional: true
+  },
+
   gender: {
     type: String,
     allowedValues: ['Male', 'Female'],

@@ -77,11 +77,27 @@
             </Editable>
             <br/>
             <span className='birthday'>
-              <i className='fa fa-gift'></i>11 November 1991
+              <i className='fa fa-gift'></i>
+
+              <Editable allowedId={ @data.user._id }
+                        name='profile.birthday'
+                        collection={ Meteor.users }
+                        id={ @data.user._id }
+                        type='Date' >
+                { moment(@data.user.profile.birthday).format('DD MMMM YYYY')}
+              </Editable>
             </span>
 
             <span className='phone_number'>
-              <i className='fa fa-phone'></i>06 77 78 38 41
+              <i className='fa fa-phone'></i>
+
+              <Editable allowedId={ @data.user._id }
+                        name='profile.phone'
+                        collection={ Meteor.users }
+                        id={ @data.user._id }
+                        type='Phone' >
+                { @data.user.profile.phone || '00 00 00 00 00' }
+              </Editable>
             </span>
           </div>
         </div>
