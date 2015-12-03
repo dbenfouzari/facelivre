@@ -15,4 +15,4 @@ Meteor.startup(function() {
   ), {
     rootElement: 'facelivre'
   })
-})
+});

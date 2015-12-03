@@ -1,5 +1,7 @@
 Meteor.publish('allUsers', function() {
-  return Meteor.users.find({}, {status: 1, profile: 1, emails: 1, username: 1});
+  return Meteor.users.find({}, {
+    status: 1, profile: 1, emails: 1, username: 1, address: 1
+  });
 });
 
 Meteor.publish('friendships', function(user_id) {
@@ -72,12 +74,4 @@ Meteor.publish('comments', function(commentable) {
       commentableId: commentable.id
     }
   });
-});
-
-Meteor.publish('addresses', function() {
-  return AddressCollection.find()
-});
-
-Meteor.publish('users_addresses', function() {
-  return UserAddressCollection.find()
 });

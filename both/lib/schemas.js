@@ -1,42 +1,68 @@
 Schemas = {};
 
-Schemas.Addressable = new SimpleSchema({
+SimpleSchema.messages({
+  needLatLong: '[label] should be of form [longitude, latitude]',
+  lonOutOfRange: '[label] longitude should be between -90 and 90',
+  latOutOfRange: '[label] latitude should be between -180 and 180'
+});
+
+Schemas.LocationSchema = new SimpleSchema({
   type: {
-    type: SimpleSchema.RegEx.Id,
-    optional: false
+    type: String,
+    allowedValues: ['Point']
   },
 
-  id: {
-    type: SimpleSchema.RegEx.Id,
-    optional: false,
-    index: true
+  coordinates: {
+    type: [Number],
+    decimal: true,
+    minCount: 2,
+    maxCount: 2,
+    custom: function() {
+      if(this.value.length != 2) {
+        return 'needLatLong';
+      }
+
+      if(this.value[0] < -90 || this.value[0] > 90) {
+        return 'lonOutOfRange';
+      }
+
+      if(this.value[1] < -180 || this.value[1] > 180) {
+        return 'latOutOfRange';
+      }
+    }
   }
 });
 
 Schemas.Address = new SimpleSchema({
   street_number: {
     type: String,
-    optional: false
+    optional: true
   },
 
   route: {
     type: String,
-    optional: false
+    optional: true
   },
 
   city: {
     type: String,
-    optional: false
+    optional: true
   },
 
   postal_code: {
     type: String,
-    optional: false
+    optional: true
   },
 
   country: {
     type: String,
-    optional: false
+    optional: true
+  },
+
+  position: {
+    type: Schemas.LocationSchema,
+    index: '2dsphere',
+    optional: true
   }
 });
 
@@ -76,6 +102,11 @@ Schemas.Profile = new SimpleSchema({
     type: String,
     optional: true
   },
+
+  address: {
+    type: Schemas.Address,
+    optional: false
+  }
 });
 
 Schemas.UserStatusLogin = new SimpleSchema({
@@ -111,7 +142,7 @@ Schemas.User = new SimpleSchema({
     // For accounts-password, either emails or username is required, but not both. It is OK to make this
     // optional here because the accounts-password package does its own validation.
     // Third-party login packages may not require either. Adjust this schema as necessary for your usage.
-    optional: true
+    optional: false
   },
 
   emails: {
@@ -119,7 +150,7 @@ Schemas.User = new SimpleSchema({
     // For accounts-password, either emails or username is required, but not both. It is OK to make this
     // optional here because the accounts-password package does its own validation.
     // Third-party login packages may not require either. Adjust this schema as necessary for your usage.
-    optional: true
+    optional: false
   },
 
   "emails.$": {
@@ -160,23 +191,24 @@ Schemas.User = new SimpleSchema({
   },
 
   slug: {
-    type: String
+    type: String,
+    optional: true
   }
 });
 
-Schemas.UserAddress = new SimpleSchema({
-  user: {
-    type: SimpleSchema.RegEx.Id,
-    optional: false,
-    index: true
-  },
+// Schemas.UserAddress = new SimpleSchema({
+//   user: {
+//     type: SimpleSchema.RegEx.Id,
+//     optional: false,
+//     index: true
+//   },
 
-  address: {
-    type: SimpleSchema.RegEx.Id,
-    optional: false,
-    index: true
-  }
-});
+//   address: {
+//     type: SimpleSchema.RegEx.Id,
+//     optional: false,
+//     index: true
+//   }
+// });
 
 Schemas.FriendShip = new SimpleSchema({
   emitter: {

@@ -7,6 +7,7 @@
 
   getDefaultProps: ->
     type: 'String'
+    id: ''
 
   humanizeField: ->
     field = @props.name
@@ -29,16 +30,6 @@
         else
           $el.text()
 
-        if @props.type is 'Date'
-          previousText = @formatShownToFormatted(previousText)
-          $input = $("<input class='editable-input' value='#{previousText}' type='date'>")
-
-        else if @props.type is 'Phone'
-          $input = $("<input class='editable-input' value='#{previousText}' type='tel'>")
-
-        else
-          $input = $("<input class='editable-input' value='#{previousText}'/>")
-
         $container = $("<div class='editable-container'>
           <h3 class='editable-title'>Enter #{@humanizeField(@props.name)}</h3>
         </div>")
@@ -50,6 +41,29 @@
         # $input = $("<input class='editable-input' value='#{previousText}'/>")
         $submit = $("<button type='submit' class='btn btn-primary editable-submit'>Go</button>")
 
+        if @props.type is 'Date'
+          previousText = @formatShownToFormatted(previousText)
+          $input = $("<input class='editable-input' value='#{previousText}' type='date'>")
+
+        else if @props.type is 'Phone'
+          $input = $("<input class='editable-input' value='#{previousText}' type='tel'>")
+
+        else if @props.type is 'Address'
+          $input = $("<input class='editable-input large' value='#{previousText}'>")
+          $additionals = $("<div id='details'>
+                              <input name='lat' type='hidden'/>
+                              <input name='lng' type='hidden'/>
+                              <input name='street_number' type='hidden'/>
+                              <input name='route' type='hidden'/>
+                              <input name='postal_code' type='hidden'/>
+                              <input name='locality' type='hidden'/>
+                              <input name='country' type='hidden'/>
+                            </div>")
+          $container.append $additionals
+
+        else
+          $input = $("<input class='editable-input' value='#{previousText}'/>")
+
         $container.append $arrow
         $buttons.append $input
         $buttons.append $submit
@@ -57,6 +71,13 @@
         $content.append $form
         $container.append $content
         $el.append $container
+
+        $input.focus()
+        $input.select()
+
+        if @props.type is 'Address'
+          $input.geocomplete
+            details: '#details'
 
         setTimeout ->
           $container.css "opacity", 1
@@ -72,11 +93,36 @@
           if self.props.type is 'Date'
             value = self.formatFormattedToDate(value)
 
-          if value != previousText
-            obj = {}
-            obj["#{self.props.name}"] = value
+          else if self.props.type is 'Address'
+            fields =
+              lat: 'lat'
+              lon: 'lng'
+              street_number: 'street_number'
+              route: 'route'
+              city: 'locality'
+              postal_code: 'postal_code'
+              country: 'country'
+
+            formatted_fields = {}
+
+            _.map fields, (returned, in_db) ->
+              formatted_fields[in_db] = $("#details input[name=#{returned}]").val()
+
+            formatted_fields.position =
+              type: 'Point'
+              coordinates: [formatted_fields.lon, formatted_fields.lat]
+
+            value = formatted_fields
+
+          if value != previousText and value != ''
+            if self.props.name
+              obj = {}
+              obj["#{self.props.name}"] = value
+            else
+              obj = value
 
             self.props.collection.update({_id: self.props.id}, {$set: obj})
+
           self.removeContainer(self)
 
         $(document).click ->
