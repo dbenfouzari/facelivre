@@ -8,7 +8,8 @@ Schemas.Addressable = new SimpleSchema({
 
   id: {
     type: SimpleSchema.RegEx.Id,
-    optional: false
+    optional: false,
+    index: true
   }
 });
 
@@ -166,24 +167,28 @@ Schemas.User = new SimpleSchema({
 Schemas.UserAddress = new SimpleSchema({
   user: {
     type: SimpleSchema.RegEx.Id,
-    optional: false
+    optional: false,
+    index: true
   },
 
   address: {
     type: SimpleSchema.RegEx.Id,
-    optional: false
+    optional: false,
+    index: true
   }
 });
 
 Schemas.FriendShip = new SimpleSchema({
   emitter: {
-    type: String, // User ID
-    optional: false
+    type: SimpleSchema.RegEx.Id, // User ID
+    optional: false,
+    index: true
   },
 
   receiver: {
-    type: String, // User ID
-    optional: false
+    type: SimpleSchema.RegEx.Id, // User ID
+    optional: false,
+    index: true
   },
 
   accepted: {
@@ -228,12 +233,14 @@ Schemas.ReadStatus = new SimpleSchema({
 Schemas.Message = new SimpleSchema({
   emitter: {
     type: SimpleSchema.RegEx.Id,
-    optional: false
+    optional: false,
+    index: true
   },
 
   receiver: {
     type: SimpleSchema.RegEx.Id,
-    optional: false
+    optional: false,
+    index: true
   },
 
   message: {
@@ -265,7 +272,8 @@ Schemas.Status = new SimpleSchema({
 
   authorId: {
     type: SimpleSchema.RegEx.Id,
-    optional: false
+    optional: false,
+    index: true
   },
 
   likers: {
@@ -300,7 +308,8 @@ Schemas.Commentable = new SimpleSchema({
 
   commentableId: {
     type: SimpleSchema.RegEx.Id,
-    optional: false
+    optional: false,
+    index: true
   }
 });
 
@@ -312,7 +321,8 @@ Schemas.Comment = new SimpleSchema({
 
   authorId: {
     type: SimpleSchema.RegEx.Id,
-    optional: false
+    optional: false,
+    index: true
   },
 
   content: {
