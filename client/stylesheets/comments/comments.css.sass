@@ -15,6 +15,10 @@ ul.comments
     padding: 0 $comment-padding-left
     margin-bottom: 30px
 
+    &:hover
+      .remove
+        display: initial
+
     &:first-child
       margin-top: 30px
 
@@ -50,3 +54,15 @@ ul.comments
       margin: 0
       padding-left: $comment-user-image-margin-right + $comment-user-image-dims
       white-space: pre-line
+
+    span.remove
+      float: right
+      position: absolute
+      display: none
+      cursor: pointer
+      color: inherit
+      font-size: 21px
+      font-weight: 700
+      line-height: 1
+      text-shadow: 0 1px 0 #FFF
+      opacity: .2

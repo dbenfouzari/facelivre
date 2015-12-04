@@ -18,6 +18,10 @@
   componentDidMount: ->
     $(@refs.paragraph).html(Emojis.parse($(@refs.paragraph).text()))
 
+  handleDelete: ->
+    CommentCollection.remove
+      _id: @props.comment._id
+
   render: ->
     user = new User(@data.author._id)
 
@@ -34,4 +38,6 @@
       <p ref='paragraph'>
         { @props.comment.content }
       </p>
+
+      <span className='remove' onClick={ @handleDelete } >&times;</span>
     </li>
