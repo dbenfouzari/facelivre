@@ -43,8 +43,13 @@
       MessageCollection.find({read: { read: false }}).fetch()
 
   getProfilePicture: ->
-    if @meteor_collection.profile.image
-      @meteor_collection.profile.image
+    image = AssetsCollection.findOne
+      owner:
+        type: 'User'
+        id: @id
+
+    if image
+      Meteor._relativeToSiteRootUrl('/uploads/' + image.uri)
     else
       "https://placeholdit.imgix.net/~text?txtsize=50&txt=Picture&w=160&h=160"
 

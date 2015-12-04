@@ -4,5 +4,6 @@ Meteor.subscribe('friendships');
 Meteor.subscribe('emojis');
 Meteor.subscribe('messages');
 Meteor.subscribe('statuses');
+Meteor.subscribe('allImages');
 // Meteor.subscribe('addresses');
 // Meteor.subscribe('users_addresses');

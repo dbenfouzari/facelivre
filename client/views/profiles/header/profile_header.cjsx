@@ -1,6 +1,8 @@
 @ProfileHeader = React.createClass
   displayName: 'ProfileHeader'
 
+  mixins: [ReactMeteorData]
+
   contextTypes:
     user: React.PropTypes.object.isRequired
 
@@ -10,12 +12,44 @@
   getChildContext: ->
     address: @context.user.profile.address
 
+  handleImageUpload: ->
+    $(@refs.profile_pic_file).click()
+
+  getMeteorData: ->
+    user = new User(@context.user._id)
+
+    image: user.profile_picture
+
+  componentDidMount: ->
+    self = this
+    $(@refs.profile_pic_file).change (e) ->
+      existingPic = AssetsCollection.findOne(
+        owner:
+          type: 'User'
+          id: self.context.user._id)
+
+      if existingPic
+        Meteor.call 'removeAsset', existingPic._id
+
+      new AssetUpload e,
+        owner_type: 'User'
+        owner_id: self.context.user._id
+
+      # alert e.fpfile.url
+      # files = e.currentTarget.files
+
+      # _.each files, (file) ->
+
   render: ->
     user = new User(@context.user._id)
 
     <header>
+      <input type='file' ref='profile_pic_file' accept='image/*' />
       <div className='profile_picture_wrapper'>
-        <img src={ user.profile_picture } />
+        <img src={ @data.image } />
+        <span className='edit' onClick={ @handleImageUpload } >
+          <i className='fa fa-pencil'></i>
+        </span>
       </div>
 
       <ProfileHeaderMap />

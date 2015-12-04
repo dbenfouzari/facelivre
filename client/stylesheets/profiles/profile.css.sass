@@ -10,6 +10,9 @@
     background-color: #FFF
     position: relative
 
+    input[type=file]
+      display: none
+
     .friends_sample
       width: $profile-header-height
       height: $profile-header-height
@@ -47,6 +50,27 @@
       width:  $profile-picture-width
       height: $profile-picture-height
       float: left
+      position: relative
+
+      &:hover
+        span.edit
+          display: initial
+
+      span.edit
+        position: absolute
+        right: 10px
+        top: 10px
+        z-index: 1
+        color: #FFF
+        opacity: .8
+        display: none
+        cursor: pointer
+        background-color: rgba(0, 0, 0, .2)
+        +border-radius(6px)
+        padding: 8px
+        line-height: 14px
+
+        i
 
       img
         width: 100%

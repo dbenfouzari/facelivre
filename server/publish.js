@@ -4,6 +4,14 @@ Meteor.publish('allUsers', function() {
   });
 });
 
+// Meteor.publish('profileAndPhotos', function(userId) {
+//   return [
+//     Meteor.users.find({_id: userId}, {status: 1, profile: 1, emails: 1, username: 1, address: 1}),
+//     Images.find({
+//       $query: {'metadata.owner': userId}
+//     })
+//   ]
+// });
 Meteor.publish('friendships', function(user_id) {
   return FriendShipsCollection.find({
     $or: [{
@@ -12,6 +20,10 @@ Meteor.publish('friendships', function(user_id) {
       receiver: this.userId
     }]
   });
+});
+
+Meteor.publish('allImages', function() {
+  return AssetsCollection.find();
 });
 
 Meteor.publish('profiles', function() {
