@@ -4,7 +4,11 @@
   mixins: [ReactMeteorData]
 
   getMeteorData: ->
+    meteor_user = Meteor.users.findOne _id: @props.friend._id
+    user = if meteor_user then new User(meteor_user._id) else {}
+
     active: Session.get('selected')
+    friend_image: user.profile_picture
 
   componentDidMount: ->
     self = this
@@ -70,7 +74,7 @@
         { @renderNewMessages() }
 
         <div className="friend_image_wrapper #{ @getStatusClass() }">
-          <img className='friend_image' src={ @props.friend.profile.image }/>
+          <img className='friend_image' src={ @data.friend_image }/>
         </div>
 
         <span className='friend_name'>

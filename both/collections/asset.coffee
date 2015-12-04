@@ -35,6 +35,10 @@ AssetsCollection.attachSchema AssetsSchema
 
 # Define security
 AssetsCollection.allow
-  insert: (userId, doc) -> true
-  remove: (userId, doc) -> true
+  insert: (userId, doc) ->
+    userId is doc.owner.id
+
+  remove: (userId, doc) ->
+    userId is doc.owner.id
+
   update: (userId, doc, fields, modifier) -> true

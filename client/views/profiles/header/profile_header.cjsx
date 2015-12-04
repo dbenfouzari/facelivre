@@ -42,9 +42,11 @@
       <input type='file' ref='profile_pic_file' accept='image/*' />
       <div className='profile_picture_wrapper'>
         <img src={ @data.image } />
-        <span className='edit' onClick={ @handleImageUpload } >
-          <i className='fa fa-pencil'></i>
-        </span>
+        { if @context.user._id is Meteor.userId()
+          <span className='edit' onClick={ @handleImageUpload } >
+            <i className='fa fa-pencil'></i>
+          </span>
+        }
       </div>
 
       <ProfileHeaderMap />
