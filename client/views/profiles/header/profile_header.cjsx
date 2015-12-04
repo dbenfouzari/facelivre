@@ -35,11 +35,6 @@
         owner_type: 'User'
         owner_id: self.context.user._id
 
-      # alert e.fpfile.url
-      # files = e.currentTarget.files
-
-      # _.each files, (file) ->
-
   render: ->
     user = new User(@context.user._id)
 
