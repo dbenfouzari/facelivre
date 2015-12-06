@@ -7,6 +7,16 @@
 
   @media screen and (max-width: $screen-sm-max)
     padding-right: 30px // FriendsList mini + default padding
+    padding-left: 0
+
+    &.toggled
+      #status_form
+        left: 130px
+        width: calc(100% - #{$sidebar-min-width} - 30px)
+
+    #status_form
+      width: calc(100% - 30px)
+      left: 0
 
   .news_feed_wrapper
     .status_wrapper

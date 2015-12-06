@@ -7,7 +7,7 @@
     handle = Meteor.subscribe 'allStatuses'
 
     isLoading: !handle.ready()
-    statuses: StatusCollection.find().fetch()
+    statuses: StatusCollection.find().fetch().reverse()
 
   renderStatuses: ->
     _.map @data.statuses, (status) ->

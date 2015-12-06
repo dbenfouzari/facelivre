@@ -19,7 +19,7 @@ StatusSchema = new SimpleSchema
     optional: false
     autoValue: ->
       if @isInsert
-        return new Date()
+        new Date()
 
   updatedAt:
     type: Date

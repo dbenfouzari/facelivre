@@ -3,11 +3,16 @@
 
 #status_form
   float: left
-  width: 100%
+  z-index: 1
+  width: calc(100% - #{$sidebar-min-width} - #{$friends-list-width})
   border-bottom: 1px solid $border-color
-  padding: 20px 0
+  padding: 20px
   height: 100px
   margin-bottom: 20px
+  position: fixed
+  left: $sidebar-min-width
+  background-color: $grey-background
+  +transition(all .5s ease)
 
   .profile_pic
     width: 60px
