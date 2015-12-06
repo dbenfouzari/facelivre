@@ -4,7 +4,10 @@
   mixins: [ReactMeteorData]
 
   getMeteorData: ->
-    statuses: StatusCollection.find().fetch()
+    handle = Meteor.subscribe 'allStatuses'
+
+    isLoading: !handle.ready()
+    statuses: StatusCollection.find({}, { sort: { createdAt: -1 }}).fetch()
 
   onUpdate: ->
     @setState
@@ -23,7 +26,16 @@
     isFitWidth: true
 
   render: ->
-    <Statuses />
+    if @data.isLoading
+      return <LoadingSpinner />
+
+    else
+      return(
+        <div>
+          <StatusForm />
+          <Statuses statuses={ @data.statuses } />
+        </div>
+      )
 
   # render: ->
   #   <Masonry className={'news_feed_wrapper'}

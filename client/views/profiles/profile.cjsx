@@ -14,10 +14,15 @@
       slug: null
 
   getMeteorData: ->
+    # user: Meteor.users.findOne
+    #   slug: id
     id = @props.profile.slug or @props.params.user_slug
 
-    user: Meteor.users.findOne
-      slug: id
+    handle = Meteor.subscribe 'user_profile', id
+
+    isLoading: !handle.ready()
+    statuses: StatusCollection.find({}, { sort: { createdAt: -1 }}).fetch()
+    user: Meteor.users.findOne({slug: id})
 
   renderMap: ->
     user = new User(@data.user._id)
@@ -64,13 +69,13 @@
 
   renderContent: ->
     user = new User(@data.user._id)
-
     <div className='profile'>
       <ProfileHeader />
+      <Statuses statuses={ @data.statuses } />
     </div>
 
   render: ->
-    if @data.user
-      @renderContent()
-    else
-      <p>Loading...</p>
+    if @data.isLoading
+      return <LoadingSpinner />
+
+    @renderContent()
