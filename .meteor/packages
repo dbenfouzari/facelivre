@@ -25,6 +25,7 @@ cosmos:browserify
 less
 nemo64:bootstrap
 aldeed:collection2
+aldeed:simple-schema
 accounts-password
 ian:accounts-ui-bootstrap-3
 fortawesome:fontawesome

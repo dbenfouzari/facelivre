@@ -3,7 +3,12 @@
 StatusSchema = new SimpleSchema
   status:
     type: String
+    optional: true
+
+  status_type:
+    type: String
     optional: false
+    index: true
 
   authorId:
     type: SimpleSchema.RegEx.Id

@@ -9,12 +9,20 @@
     picture = $(@refs.status_picture)[0].files[0]
     text = $input.val().trim()
 
-    if text isnt '' or picture isnt 'undefined'
+    if text isnt ''
+      type = 'Text'
+    else if typeof(picture) isnt 'undefined'
+      type = 'Image'
+
+    if text isnt '' or typeof(picture) isnt 'undefined'
       StatusCollection.insert
         status: text
+        status_type: type
         authorId: Meteor.userId()
       , (error, result) ->
-        unless error
+        if error
+          console.log error
+        else
           if typeof picture isnt 'undefined'
             new AssetUpload picture,
               owner_type: 'Status'
