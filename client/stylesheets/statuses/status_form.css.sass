@@ -7,7 +7,6 @@
   width: calc(100% - #{$sidebar-min-width} - #{$friends-list-width})
   border-bottom: 1px solid $border-color
   padding: 20px
-  height: 100px
   margin-bottom: 20px
   position: fixed
   left: $sidebar-min-width
@@ -26,12 +25,61 @@
       +border-radius(50%)
 
   .input_container
-    height: 100%
+    height: 60px
     float: left
     width: calc(100% - 60px - 35px)
+    position: relative
 
     input
       height: 100%
       border: 0
-      padding: 15px
+      padding: 15px 65px 15px 15px
       width: 100%
+
+    input[type=file]
+      display: none
+
+    .add_picture
+      position: absolute
+      right: 0
+      top: 0
+      width: 60px
+      height: 60px
+      display: table
+      text-align: center
+      font-size: 22px
+      text-decoration: none
+
+      i
+        display: table-cell
+        vertical-align: middle
+
+    .picture
+      width: 60px
+      height: 60px
+      position: absolute
+      top: 0
+      right: 0
+      cursor: pointer
+
+      &:hover
+        -webkit-filter: brightness(.4)
+        filter: brightness(.4)
+
+        &:after
+          content: '\00D7'
+          display: block
+          width: 100%
+          height: 100%
+          position: absolute
+          top: 0
+          color: #FFF
+          text-align: center
+          line-height: 60px
+          font-size: 28px
+
+      img
+        width: 100%
+        height: 100%
+        object-fit: cover
+        object-position: 50% 50%

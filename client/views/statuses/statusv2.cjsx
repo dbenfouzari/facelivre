@@ -5,6 +5,10 @@
 
   getMeteorData: ->
     author: Meteor.users.findOne _id: @props.status.authorId
+    attachment: AssetsCollection.findOne
+      owner:
+        type: 'Status'
+        id: @props.status._id
 
   doILike: ->
     _.contains(@props.status.likers, Meteor.userId())
@@ -22,6 +26,13 @@
         _id: @props.status._id
       , $push:
         likers: Meteor.userId()
+
+  renderAttachment: ->
+    if @data.attachment
+      <img src={ Meteor._relativeToSiteRootUrl('/uploads/' + @data.attachment.uri) } />
+
+  componentDidMount: ->
+    $(@refs.paragraph).html(Emojis.parse($(@refs.paragraph).text()))
 
   render: ->
     author = new User(@data.author._id)
@@ -42,7 +53,8 @@
         </header>
 
         <div className='content'>
-          <p>
+          { @renderAttachment() }
+          <p ref='paragraph'>
             { @props.status.status }
           </p>
         </div>

@@ -31,7 +31,7 @@
       if existingPic
         Meteor.call 'removeAsset', existingPic._id
 
-      new AssetUpload e,
+      new AssetUpload e.target.files[0],
         owner_type: 'User'
         owner_id: self.context.user._id
 
