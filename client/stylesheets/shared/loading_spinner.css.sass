@@ -1,0 +1,78 @@
+@import '{}/client/lib/compatibility/functions.css.sass'
+@import '{}/client/lib/compatibility/variables.css.sass'
+
+.loading-spinner
+  margin: 100px auto 20px auto
+  width: 40px
+  height: 40px
+  position: relative
+  +transform(rotateZ(45deg))
+
+  &.mini
+    width: 10px
+    height: 10px
+
+  .loading-cube
+    float: left
+    width: 50%
+    height: 50%
+    position: relative
+    +transform(scale(1.1))
+
+    &:before
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      background-color: $sidebar-active-bg-color
+      +animation(loadingCubeFold 2.4s infinite linear both)
+      +transform-origin(100% 100%)
+
+    &.loading-cube-2
+      +transform(scale(1.1) rotateZ(90deg))
+      &:before
+        +animation-delay(.3s)
+
+    &.loading-cube-3
+      +transform(scale(1.1) rotateZ(180deg))
+      &:before
+        +animation-delay(.6s)
+
+    &.loading-cube-4
+      +transform(scale(1.1) rotateZ(270deg))
+      &:before
+        +animation-delay(.9s)
+
+@-webkit-keyframes loadingCubeFold
+  0%, 10%
+    -webkit-transform: perspective(140px) rotateX(-180deg)
+    transform: perspective(140px) rotateX(-180deg)
+    opacity: 0;
+
+  25%, 75%
+    -webkit-transform: perspective(140px) rotateX(0deg)
+    transform: perspective(140px) rotateX(0deg)
+    opacity: 1
+
+  90%, 100%
+    -webkit-transform: perspective(140px) rotateY(180deg)
+    transform: perspective(140px) rotateY(180deg)
+    opacity: 0
+
+@keyframes loadingCubeFold
+  0%, 10%
+    -webkit-transform: perspective(140px) rotateX(-180deg)
+    transform: perspective(140px) rotateX(-180deg)
+    opacity: 0;
+
+  25%, 75%
+    -webkit-transform: perspective(140px) rotateX(0deg)
+    transform: perspective(140px) rotateX(0deg)
+    opacity: 1
+
+  90%, 100%
+    -webkit-transform: perspective(140px) rotateY(180deg)
+    transform: perspective(140px) rotateY(180deg)
+    opacity: 0

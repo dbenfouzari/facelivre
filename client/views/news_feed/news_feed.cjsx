@@ -23,8 +23,10 @@
     isFitWidth: true
 
   render: ->
-    <Masonry className={'news_feed_wrapper'}
-             options={@getMasonryOptions()} >
-      { @renderStatuses() }
-    </Masonry>
+    <Statuses />
 
+  # render: ->
+  #   <Masonry className={'news_feed_wrapper'}
+  #            options={@getMasonryOptions()} >
+  #     { @renderStatuses() }
+  #   </Masonry>

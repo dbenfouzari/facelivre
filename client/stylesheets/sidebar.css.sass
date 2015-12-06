@@ -8,71 +8,67 @@
   .sidebar_wrapper
     z-index: 1
     position: fixed
-    left: $sidebar-full-width
+    left: 0
     // width: $sidebar-min-width
     height: 100%
-    top: 40px
-    margin-left: -$sidebar-full-width
+    top: $navbar-height
     overflow-y: auto
     background-color: $sidebar-bg-color
     +transition(all 0.5s ease)
 
     &:hover
       // width: $sidebar-full-width
-      box-shadow: 5px 0 15px rgba(0, 0, 0, .3)
+      // box-shadow: 5px 0 15px rgba(0, 0, 0, .3)
 
     .sidebar
       position: absolute
       top: 0
-      width: $sidebar-full-width
+      width: 100%
       margin: 0
       padding: 0
       list-style: none
 
       li
-        text-indent: 20px
-        line-height: $sidebar-link-height
         height: $sidebar-link-height
-        color: #999
+        color: #77848D
+        display: table
+        width: 100%
+        position: relative
 
         &.active, &:hover
           a
             color: $sidebar-active-color
             background: $sidebar-active-bg-color
 
+        &.active
+          &:after
+            content: ''
+            display: block
+            +border-radius(4px)
+            width: 40px
+            height: 40px
+            background-color: $grey-background
+            +transform(rotate(45deg))
+            position: absolute
+            right: -30px
+            top: 50%
+            margin-top: -20px
+
         a
-          display: block
+          display: table-cell
+          vertical-align: middle
           text-decoration: none
           color: #999
           font-size: 16px
+          text-align: center
 
           &:focus, &:active
             text-decoration: none
 
-          &:before
-            font-family: FontAwesome
+          i
             display: block
-            float: left
-            width: 50px
-            text-align: center
-            font-size: 24px
-            margin-top: -2px
-
-          &.nav-profile
-            &:before
-              content: '\f007'
-
-          &.nav-feed
-            &:before
-              content: '\f1ea'
-
-          &.nav-friends
-            &:before
-              content: '\f0c0'
-
-          &.nav-messages
-            &:before
-              content: '\f0e6'
+            font-size: 26px
+            margin-bottom: 5px
 
   &.toggled
     padding-left: 15px + $sidebar-min-width
