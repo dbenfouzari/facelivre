@@ -7,8 +7,6 @@
     autosize($(@refs.comment))
 
     $(@refs.comment)
-      .on 'autosize:resized', ->
-        self.props.onUpdate()
       .keydown (e) ->
         if e.keyCode is 13 and !e.shiftKey
           e.preventDefault()
@@ -29,7 +27,6 @@
 
       $(@refs.comment).val ''
       autosize.update $(@refs.comment)
-      @props.onUpdate()
 
   render: ->
     <form ref='comment_form' onSubmit={ @handleSubmit }>

@@ -10,8 +10,50 @@
         type: 'Status'
         id: @props.status._id
 
+    comments: CommentCollection.find(
+      commentable:
+        commentableType: 'Status'
+        commentableId: @props.status._id
+    ).fetch()
+
+    likers: Meteor.users.find(
+      _id:
+        $in: @props.status.likers || []
+    ).fetch()
+
   doILike: ->
     _.contains(@props.status.likers, Meteor.userId())
+
+  getLikesLabel: ->
+    if @props.status.likers
+      likes_count = @props.status.likers.length
+      likers_users = @data.likers
+
+      if likes_count > 0
+        phrase = if likes_count is 1
+          user = new User(likers_users[0]._id).full_name
+          "#{user} aime"
+
+        else
+          users = _.map likers_users, (liker) ->
+            user = new User(liker._id)
+            user.full_name
+
+          names = if users.length is 2
+            users.join(' et ')
+
+          else
+            last_name = users.pop()
+
+            names = users.join(', ')
+            names = names + " et " + last_name
+
+          "#{names} aiment"
+
+        <span className='likes_count'
+              title={ phrase }>
+          { likes_count }
+        </span>
 
   handleLike: (e) ->
     e.preventDefault()
@@ -27,12 +69,38 @@
       , $push:
         likers: Meteor.userId()
 
+  getCommentsLabel: ->
+    comments_count = @data.comments.length
+
+    if comments_count > 0
+      phrase = if comments_count is 1
+        "1 personne a commenté"
+      else
+        "#{comments_count} personnes ont commenté"
+
+      return (
+        <span className='comments_count'
+              title={ phrase }>
+          { comments_count }
+        </span>
+      )
+
+  handleShowComments: (e) ->
+    e.preventDefault()
+
+    $(@refs.btn_comments).toggleClass 'active'
+    $(@refs.section_comments).toggleClass 'active'
+
   renderAttachment: ->
     if @data.attachment
       <img src={ Meteor._relativeToSiteRootUrl('/uploads/' + @data.attachment.uri) } />
 
   componentDidMount: ->
     $(@refs.paragraph).html(Emojis.parse($(@refs.paragraph).text()))
+
+  getCommentable: ->
+    type: 'Status'
+    id: @props.status._id
 
   render: ->
     author = new User(@data.author._id)
@@ -52,24 +120,26 @@
           </abbr>
         </header>
 
-        <div className='content'>
+        <section className='content'>
           { @renderAttachment() }
           <p ref='paragraph'>
             { @props.status.status }
           </p>
-        </div>
+        </section>
 
-        <div className='bottom'>
+        <section className='bottom'>
           <ul className='actions'>
             <li>
               <a href='#' className={ @doILike() } onClick={ @handleLike } >
                 <i className='fa fa-heart'></i>
+                { @getLikesLabel() }
                 Like
               </a>
             </li>
             <li>
-              <a href='#'>
+              <a href='#' ref='btn_comments' onClick={ @handleShowComments } >
                 <i className='fa fa-comments-o'></i>
+                { @getCommentsLabel() }
                 Comment
               </a>
             </li>
@@ -80,6 +150,11 @@
               </a>
             </li>
           </ul>
-        </div>
+        </section>
+
+        <section className='comments' ref='section_comments'>
+          <Comments commentable={ @getCommentable() } />
+          <CommentForm commentable={ @getCommentable() } />
+        </section>
       </div>
     </li>

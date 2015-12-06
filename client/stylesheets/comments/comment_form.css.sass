@@ -1,17 +1,23 @@
 @import '{}/client/lib/compatibility/variables.css.sass'
+@import '{}/client/lib/compatibility/functions.css.sass'
 
 section.comments
-  height: auto
+  // height: auto
   background-color: #FFF
   width: 100%
   float: left
   position: relative
-  min-height: 50px
-
-  display: none
+  // min-height: 50px
+  overflow: hidden
+  +transform(scaleY(0))
+  +transition(all .5s ease)
+  +transform-origin(50% 0)
+  max-height: 0
 
   &.active
-    display: block
+    min-height: 50px
+    max-height: 500px
+    +transform(scaleY(1))
 
   form
     float: left

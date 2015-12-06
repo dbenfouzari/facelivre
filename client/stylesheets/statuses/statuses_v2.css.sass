@@ -11,6 +11,17 @@
     margin: 0
     padding: 0
     padding-top: 120px
+    float: left
+    position: relative
+
+    &:after
+      content: ''
+      width: 2px
+      height: 100%
+      position: absolute
+      background-color: #CCC
+      z-index: -1
+      margin-left: -2px
 
     .status_container
       width: 50%
@@ -19,7 +30,7 @@
 
       &:nth-child(odd)
         float: left
-        border-right: 2px solid #CCC
+        // border-right: 2px solid #CCC
         padding-right: 40px
         padding-left: 20px
         clear: both
@@ -43,14 +54,14 @@
         float: right
         padding-left: 40px
         padding-right: 20px
+        top: 90px
 
         .author_image
           left: -30px
-          top: 80px
+          top: -10px
 
         .status
           position: relative
-          top: 90px
 
           &:after, &:before
             right: 100%
@@ -162,6 +173,11 @@
                 color: #9A9DA2
                 display: block
                 text-decoration: none
+                position: relative
+
+                &.active
+                  background-color: #FFF
+                  color: #999
 
                 &.true
                   color: #FFF
@@ -173,3 +189,17 @@
 
                 i
                   margin-right: 5px
+
+                .likes_count, .comments_count
+                  position: absolute
+                  background-color: rgba(15, 80, 101, .4)
+                  color: #FFF
+                  font-size: 11px
+                  font-weight: bold
+                  height: 15px
+                  padding: 0 5px
+                  display: block
+                  bottom: 0
+                  +border-radius(0 5px 0 0)
+
+        .comments

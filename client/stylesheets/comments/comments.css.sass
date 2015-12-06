@@ -31,6 +31,9 @@ ul.comments
       .author_image
         float: left
         clear: left
+        left: initial !important
+        top: initial !important
+        right: initial !important
         margin-right: $comment-user-image-margin-right
 
         img
@@ -42,11 +45,16 @@ ul.comments
         color: #333
         clear: both
         font-weight: bold
+        position: relative
+        left: 75px
 
       .created_at
         display: block
         color: #999
         font-size: 11px
+        position: relative
+        left: 75px
+        display: table-cell
 
     p
       float: left
