@@ -76,7 +76,7 @@
             <li>
               <a href='#'>
                 <i className='fa fa-share-alt'></i>
-                Like
+                Share
               </a>
             </li>
           </ul>
