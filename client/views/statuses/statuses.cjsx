@@ -20,6 +20,7 @@
     else
       return(
         <div className='statuses_wrapper'>
+          <StatusForm />
           <ul className='statuses'>{ @renderStatuses() }</ul>
         </div>
       )
