@@ -70,9 +70,11 @@
       </div>
 
   render: ->
+    user = new User(Meteor.userId())
+
     <form id='status_form' onSubmit={ @handleSubmit } >
       <div className='profile_pic'>
-        <img src='https://s3.amazonaws.com/uifaces/faces/twitter/vladarbatov/128.jpg' />
+        <img src={ user.profile_picture } />
       </div>
 
       <div className='input_container'>
