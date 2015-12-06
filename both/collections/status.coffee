@@ -3,7 +3,12 @@
 StatusSchema = new SimpleSchema
   status:
     type: String
+    optional: true
+
+  status_type:
+    type: String
     optional: false
+    index: true
 
   authorId:
     type: SimpleSchema.RegEx.Id
@@ -19,7 +24,7 @@ StatusSchema = new SimpleSchema
     optional: false
     autoValue: ->
       if @isInsert
-        return new Date()
+        new Date()
 
   updatedAt:
     type: Date

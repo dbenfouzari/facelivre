@@ -1,10 +1,8 @@
 class @AssetUpload
   constructor: (e, owner) ->
     self = this
-    @files = e.target.files
 
-    _.each @files, (file) ->
-      self.upload_file file, owner
+    self.upload_file e, owner
 
   upload_file: (file, owner) ->
     reader = new FileReader()

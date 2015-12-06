@@ -22,7 +22,7 @@ Schema = new SimpleSchema
     optional: false
     autoValue: ->
       if this.isInsert
-        return new Date()
+        new Date()
 
 FriendShipsCollection.attachSchema Schema
 

@@ -4,7 +4,7 @@
 
   render: ->
     <nav className='navbar navbar-default navbar-fixed-top'>
-      <div className='container'>
+      <div className='container-fluid'>
         <div className='navbar-header'>
           <button className='navbar-toggle collapsed'
                   type='button'
@@ -14,7 +14,9 @@
             <span className='icon-bar'/>
           </button>
 
-          <Link to='/' className='navbar-brand'>Facelivre</Link>
+          <Link to='/' className='navbar-brand'>
+            <i className='fa fa-book'></i>
+          </Link>
         </div>
 
         <NavbarLinks/>

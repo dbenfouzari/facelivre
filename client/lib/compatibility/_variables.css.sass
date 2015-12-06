@@ -1,5 +1,8 @@
-$border-color: #CCC;
-$grey-background: #E9EAED;
+// $border-color: #CCC;
+$border-color: #E7E7E7;
+// $grey-background: #E9EAED;
+$grey-background: #F5F5F5;
+$background-color: #FFF;
 
 // Friends List
 $friends-list-width: 250px;
@@ -21,20 +24,24 @@ $status-form-height: 100px;
 
 // Sidebar
 $sidebar-bg-color: #1F282D;
-// $sidebar-active-bg-color: #E9EAED;
-$sidebar-active-bg-color: #06AEEF;
+// $sidebar-active-bg-color: $grey-background;
+// $sidebar-active-bg-color: #06AEEF;
+$sidebar-active-bg-color: inherit;
 // $sidebar-active-color: #333;
 $sidebar-active-color: #FFF;
-$sidebar-min-width: 70px;
-$sidebar-full-width: 250px;
-$sidebar-link-height: 60px;
+// $sidebar-min-width: 70px;
+$sidebar-min-width: 130px;
+// $sidebar-full-width: 250px;
+$sidebar-full-width: $sidebar-min-width;
+// $sidebar-link-height: 60px;
+$sidebar-link-height: 100px;
 
 // Profile
 $profile-header-height: 270px;
 $profile-picture-width: 250px;
 $profile-picture-height: $profile-header-height * 2 / 3;
 
-$navbar-height: 40px;
+$navbar-height: 90px;
 
 @media screen and (max-width: 863px) {
   $friends-list-width: 0;
