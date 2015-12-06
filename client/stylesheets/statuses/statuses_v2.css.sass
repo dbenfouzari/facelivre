@@ -40,6 +40,9 @@
           top: -8px
 
         .status
+          i.fa-trash
+            margin-right: 10px
+
           &:after, &:before
             left: 100%
             top: 20px
@@ -62,6 +65,9 @@
 
         .status
           position: relative
+
+          i.fa-trash
+            margin-left: 10px
 
           &:after, &:before
             right: 100%
@@ -121,6 +127,14 @@
           float: left
           width: 100%
           display: flex
+
+          &:hover
+            i.fa-trash
+              display: block
+              margin-top: 3px
+
+          i.fa-trash
+            display: none
 
           span.author_name
             float: left

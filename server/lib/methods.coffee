@@ -44,3 +44,6 @@ Meteor.methods
       if error
         console.warn 'error: ', error
     AssetsCollection.remove asset._id
+
+  removeComments: (ids) ->
+    CommentCollection.remove _id: $in: ids

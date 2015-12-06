@@ -21,6 +21,20 @@
         $in: @props.status.likers || []
     ).fetch()
 
+  handleRemove: (e) ->
+    e.preventDefault()
+
+    attachment = @data.attachment
+    comments   = @data.comments
+
+    if attachment
+      AssetsCollection.remove _id: attachment._id
+
+    if comments.length > 0
+      Meteor.call 'removeComments', _.map(comments, (comment) -> comment._id)
+
+    StatusCollection.remove _id: @props.status._id
+
   doILike: ->
     _.contains(@props.status.likers, Meteor.userId())
 
@@ -112,6 +126,11 @@
 
       <div className='status'>
         <header>
+          { if @props.status.authorId is Meteor.userId()
+            <a href='#' ref='remove_status' onClick={ @handleRemove } >
+              <i className='fa fa-trash'></i>
+            </a>
+           }
           <span className='author_name'>{ author.full_name }</span>
 
           <abbr title={ moment(@props.status.createdAt).format('LLLL') }

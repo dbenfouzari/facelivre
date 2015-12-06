@@ -38,7 +38,8 @@ AssetsCollection.allow
   insert: (userId, doc) ->
     userId is doc.owner.id
 
-  remove: (userId, doc) ->
-    userId is doc.owner.id
+  # remove: (userId, doc) ->
+  #   userId is doc.owner.id
+  remove: -> true
 
   update: (userId, doc, fields, modifier) -> true
