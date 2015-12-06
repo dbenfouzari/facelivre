@@ -18,9 +18,14 @@
   componentDidMount: ->
     $(@refs.paragraph).html(Emojis.parse($(@refs.paragraph).text()))
 
-  handleDelete: ->
-    CommentCollection.remove
-      _id: @props.comment._id
+  handleDelete: (e) ->
+    e.preventDefault()
+    self = this
+
+    $(ReactDOM.findDOMNode(@)).fadeOut 500, ->
+      CommentCollection.remove
+        _id: self.props.comment._id
+      return
 
   render: ->
     user = new User(@data.author._id)

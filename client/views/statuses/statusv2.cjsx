@@ -35,6 +35,9 @@
 
     StatusCollection.remove _id: @props.status._id
 
+  handleEdit: (e) ->
+    e.preventDefault()
+
   doILike: ->
     _.contains(@props.status.likers, Meteor.userId())
 
@@ -127,9 +130,14 @@
       <div className='status'>
         <header>
           { if @props.status.authorId is Meteor.userId()
-            <a href='#' ref='remove_status' onClick={ @handleRemove } >
-              <i className='fa fa-trash'></i>
-            </a>
+            <div>
+              <a href='#' ref='remove_status' onClick={ @handleRemove } >
+                <i className='fa fa-trash'></i>
+              </a>
+              <a href='#' ref='edit_status' onClick={ @handleEdit } >
+                <i className='fa fa-pencil'></i>
+              </a>
+            </div>
            }
           <span className='author_name'>{ author.full_name }</span>
 

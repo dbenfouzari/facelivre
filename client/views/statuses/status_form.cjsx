@@ -31,6 +31,7 @@
     $input.val ''
     $(@refs.status_picture).val ''
     @setState picture_selected: false
+    autosize.update $input
 
     e.preventDefault()
 
@@ -69,6 +70,18 @@
         </a>
       </div>
 
+  componentDidMount: ->
+    self = this
+
+    autosize($(@refs.status))
+
+    $(@refs.status)
+      .keydown (e) ->
+        if e.keyCode is 13 and !e.shiftKey
+          e.preventDefault()
+
+          self.handleSubmit(e)
+
   render: ->
     user = new User(Meteor.userId())
 
@@ -78,7 +91,7 @@
       </div>
 
       <div className='input_container'>
-        <input ref='status' type='text' placeholder="What's on your mind ?"/>
+        <textarea rows='1' ref='status' type='text' placeholder="What's on your mind ?"/>
 
         <div ref='picture_selector'>
           <input type='file' ref='status_picture' accept='image/*' onChange={ @handleSubmittedPicture } />

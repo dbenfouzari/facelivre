@@ -6,7 +6,7 @@
   z-index: 1
   width: calc(100% - #{$sidebar-min-width} - #{$friends-list-width})
   border-bottom: 1px solid $border-color
-  padding: 20px 20px 20px 30px
+  padding: 25px 20px 20px 30px
   margin-bottom: 20px
   position: fixed
   left: $sidebar-min-width
@@ -14,8 +14,8 @@
   +transition(all .5s ease)
 
   .profile_pic
-    width: 60px
-    height: 60px
+    width: 50px
+    height: 50px
     float: left
     margin-right: 25px
 
@@ -25,12 +25,13 @@
       +border-radius(50%)
 
   .input_container
-    height: 60px
+    // height: 60px
+    height: auto
     float: left
-    width: calc(100% - 60px - 35px)
+    width: calc(100% - 50px - 35px)
     position: relative
 
-    input
+    textarea
       height: 100%
       border: 0
       padding: 15px 65px 15px 15px
@@ -43,8 +44,8 @@
       position: absolute
       right: 0
       top: 0
-      width: 60px
-      height: 60px
+      width: 50px
+      height: 50px
       display: table
       text-align: center
       font-size: 22px
@@ -55,8 +56,8 @@
         vertical-align: middle
 
     .picture
-      width: 60px
-      height: 60px
+      width: 50px
+      height: 50px
       position: absolute
       top: 0
       right: 0
@@ -77,6 +78,8 @@
           text-align: center
           line-height: 60px
           font-size: 28px
+          -webkit-filter: brightness(.8)
+          filter: brightness(.8)
 
       img
         width: 100%
