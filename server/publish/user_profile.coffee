@@ -1,9 +1,12 @@
 Meteor.publish 'user_profile', (slug) ->
-  target_user  = slug
 
-  user = Meteor.users.findOne slug: target_user
+  if slug
+    user = Meteor.users.findOne slug: slug
 
-  return [
-    Meteor.users.find slug: target_user
-    StatusCollection.find authorId: user._id
-  ]
+    return [
+      Meteor.users.find slug: slug
+      StatusCollection.find authorId: user._id
+    ]
+
+  else
+    []
