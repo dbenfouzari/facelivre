@@ -18,7 +18,7 @@
             <i className='fa fa-book'></i>
           </Link>
         </div>
-
+        <NavbarForm />
         <NavbarLinks/>
       </div>
     </nav>

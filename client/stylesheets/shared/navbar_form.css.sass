@@ -1,0 +1,33 @@
+@import '{}/client/lib/compatibility/functions.css.sass'
+@import '{}/client/lib/compatibility/variables.css.sass'
+
+.navbar-search
+  width: 600px
+  // margin: 0 auto
+  margin: 0 0 0 120px
+  float: left
+
+  form.navbar-form
+    width: 100%
+    margin: 0
+
+    .form-group
+      width: 100%
+      padding: 10px 0
+
+      i
+        display: inline-block
+        position: absolute
+        top: 22px
+        color: #999
+
+      input[type=search]
+        width: 100%
+        height: $navbar-height - 20px
+        padding: 6px 12px 6px 35px
+        border: 0
+        +box-shadow(none)
+        font-size: 16px
+
+        &:focus, &:active
+          border-bottom: 1px solid $border-color
